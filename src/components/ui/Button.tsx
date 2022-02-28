@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { defaultTheme } from '../app/theme/defaultTheme';
+import { defaultTheme } from '../../app/theme/defaultTheme';
 import { FC } from 'react';
 import { BoxProps, Space } from './Box';
 import { FlexBox } from './FlexBox';
@@ -10,6 +10,7 @@ export type ButtonType = 'primary' | 'secondary' | 'grey' | 'black';
 export interface ButtonProps extends BoxProps {
     type?: ButtonType;
     icon?: IconType;
+    onClick?: () => void;
 }
 
 const ButtonTypeMixin = (type?: ButtonType, theme?: typeof defaultTheme) => {
@@ -72,9 +73,9 @@ export const ButtonWrapper = styled(FlexBox)<ButtonProps & { flag: boolean }>`
 `;
 
 export const Button: FC<ButtonProps> = (props) => {
-    const { children, ...wrapperProps } = props;
+    const { children, onClick, ...wrapperProps } = props;
     return (
-        <ButtonWrapper {...wrapperProps} flag={!!children} gap={Space.small}>
+        <ButtonWrapper onClick={onClick} {...wrapperProps} flag={!!children} gap={Space.small}>
             {wrapperProps.icon ? <Icon type={wrapperProps.icon} /> : null}
             {children}
         </ButtonWrapper>

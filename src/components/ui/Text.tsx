@@ -1,5 +1,6 @@
 import styled, { css } from 'styled-components';
 import { Box } from './Box';
+import { FlexBox } from './FlexBox';
 
 export type TextType =
     | 'normal'
@@ -75,6 +76,13 @@ const TextSize = (type: TextType) => {
 };
 
 export const Text = styled(Box)<TextProps>`
+    font-family: Montserrat, sans-serif;
+
+    // Text size
+    ${(p) => TextSize(p.type ?? 'small')};
+`;
+
+export const TextFlexBox = styled(FlexBox)<TextProps>`
     font-family: Montserrat, sans-serif;
 
     // Text size

@@ -1,7 +1,7 @@
 /**
  * Обычный ответ API
  */
-export interface APIControllerResponse<T> {
+export interface APIControllerResponse<T = unknown> {
     response: T;
     error?: string;
     status: number;

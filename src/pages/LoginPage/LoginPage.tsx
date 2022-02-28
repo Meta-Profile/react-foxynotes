@@ -1,6 +1,28 @@
 import { FC } from 'react';
-import { FlexBox } from '../../components/FlexBox';
+import { FlexBox } from '../../components/ui/FlexBox';
+import { LoginContainer } from './components/LoginContainer';
+import { Text } from '../../components/ui/Text';
+import { LoginForm } from './components/LoginForm';
+import { Footer } from '../../components/Footer';
+import { useSelector } from 'react-redux';
+import { LoginPageSelector } from './selectors';
+import { RegisterForm } from './components/RegisterForm';
 
 export const LoginPage: FC = () => {
-    return <FlexBox></FlexBox>;
+    const { form } = useSelector(LoginPageSelector);
+
+    return (
+        <FlexBox column align={'center'} minHeight={'100vh'}>
+            <LoginContainer padding>
+                <FlexBox column justify={'center'} gap>
+                    <Text type={'title'}>Meta Profile</Text>
+                    <Text type={'normal'}>
+                        Мета профиль - это сервис, меняющий взаимоотношения людей в лучшую сторону.
+                    </Text>
+                </FlexBox>
+                {form === 'login' ? <LoginForm /> : <RegisterForm />}
+            </LoginContainer>
+            <Footer />
+        </FlexBox>
+    );
 };

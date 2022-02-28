@@ -4,14 +4,17 @@ import reportWebVitals from './reportWebVitals';
 import { Router } from './router/routes';
 import { store } from './store';
 import { Provider } from 'react-redux';
-import { Reset } from './components/Reset';
+import { Reset } from './components/ui/Reset';
 import { ThemeProvider } from 'styled-components';
 import { Themes } from './app/theme';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 render(
     <Provider store={store}>
         <ThemeProvider theme={Themes.default}>
             <Reset />
+            <ToastContainer />
             <Router />
         </ThemeProvider>
     </Provider>,
