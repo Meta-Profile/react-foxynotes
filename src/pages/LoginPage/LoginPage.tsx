@@ -1,5 +1,5 @@
-import {FC} from "react";
+import { FC } from 'react';
 
 export const LoginPage: FC = () => {
-  return <div>1</div>
+    return <div>1</div>;
 };
