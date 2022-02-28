@@ -4,10 +4,16 @@ import reportWebVitals from './reportWebVitals';
 import { Router } from './router/routes';
 import { store } from './store';
 import { Provider } from 'react-redux';
+import { Reset } from './components/Reset';
+import { ThemeProvider } from 'styled-components';
+import { Themes } from './app/theme';
 
 render(
     <Provider store={store}>
-        <Router />
+        <ThemeProvider theme={Themes.default}>
+            <Reset />
+            <Router />
+        </ThemeProvider>
     </Provider>,
     document.getElementById('root')
 );
