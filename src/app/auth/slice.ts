@@ -14,7 +14,7 @@ export const AuthSlice = createSlice({
     name: 'auth',
     initialState: {
         token: '',
-        error: undefined
+        error: ''
     },
     reducers: {
         updateToken: (state, action) => {
@@ -23,15 +23,15 @@ export const AuthSlice = createSlice({
     },
     extraReducers: {
         [loginAction.rejected.toString()]: (state, action) => {
-            const { response } = action.payload;
+            // const { response } = action.payload;
             toast.error('Логин или пароль введены не верно!');
-            state.error = response.error;
+            state.error = 'Логин или пароль введены не верно!';
         },
         [loginAction.fulfilled.toString()]: (state, action) => {
             const { response } = action.payload;
             toast.success('Авторизация успешно пройдена! ' + response.token);
             state.token = response.token;
-            state.error = undefined;
+            state.error = '';
             localStorage.setItem('token', response.token);
         }
     }
