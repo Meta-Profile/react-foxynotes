@@ -33,7 +33,7 @@ export const Footer: FC = () => {
                     </Text>
                 </FlexBox>
                 <FlexBox gap={Space.small}>
-                    <Text type="small"> Meta Profile &COPY; 2022 </Text>
+                    <Text type="small"> Foxy Notes &COPY; 2022 </Text>
                 </FlexBox>
             </FooterContainer>
         </FooterWrapper>

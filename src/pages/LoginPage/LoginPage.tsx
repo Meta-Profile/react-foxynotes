@@ -15,9 +15,9 @@ export const LoginPage: FC = () => {
         <FlexBox column align={'center'} minHeight={'100vh'}>
             <LoginContainer padding>
                 <FlexBox column justify={'center'} gap>
-                    <Text type={'title'}>Meta Profile</Text>
+                    <Text type={'title'}>Foxy Notes</Text>
                     <Text type={'normal'}>
-                        Мета профиль - это сервис, меняющий взаимоотношения людей в лучшую сторону.
+                        Foxy Notes - это сервис, меняющий взаимоотношения людей в лучшую сторону.
                     </Text>
                 </FlexBox>
                 {form === 'login' ? <LoginForm /> : <RegisterForm />}
