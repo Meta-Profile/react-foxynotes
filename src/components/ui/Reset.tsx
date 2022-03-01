@@ -7,6 +7,11 @@ export const Reset = createGlobalStyle`
   *::after {
     box-sizing: border-box;
   }
+  
+  *::-webkit-scrollbar {
+    width: 0px;
+    height: 0px;
+  }
 
   /* Убираем внутренние отступы */
   ul[class],
@@ -39,10 +44,7 @@ export const Reset = createGlobalStyle`
     -moz-osx-font-smoothing: grayscale;
     -webkit-font-smoothing: antialiased;
 
-    &::-webkit-scrollbar {
-      width: 0px;
-      height: 0px;
-    }
+    
   }
 
   /* Удаляем стандартную стилизацию для всех ul и il, у которых есть атрибут class*/

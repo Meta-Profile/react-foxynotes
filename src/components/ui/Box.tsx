@@ -5,7 +5,7 @@ import { defaultTheme } from './theme/defaultTheme';
 export enum Space {
     small = 8,
     default = 16,
-    large = 32
+    large = 32,
 }
 
 export type SpaceType = boolean | Space | number;
@@ -21,6 +21,7 @@ export interface BoxProps {
     height?: number | string;
     minHeight?: number | string;
     maxHeight?: number | string;
+    opacity?: number;
 }
 
 /**
@@ -48,6 +49,13 @@ export const ColorMixin = (keyword: string, color?: ColorType, theme?: typeof de
     `;
 };
 
+export const RawMixin = (keyword: string, value?: string | number) => {
+    if (!value) return null;
+    return css`
+        ${keyword}: ${value};
+    `;
+};
+
 export const SizeMixin = (keyword: string, value?: number | string) => {
     if (!value) return null;
     if (typeof value === 'number')
@@ -67,6 +75,7 @@ export const Box = styled.div<BoxProps>`
     // Цвета
     ${(p) => ColorMixin('color', p.color, p.theme)};
     ${(p) => ColorMixin('background-color', p.backgroundColor, p.theme)};
+    ${(p) => RawMixin('opacity', p.opacity)};
 
     // Размеры
     ${(p) => SizeMixin('width', p.width)};

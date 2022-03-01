@@ -68,6 +68,7 @@ export const ButtonWrapper = styled(FlexBox)<ButtonProps & { flag: boolean }>`
     min-height: 40px;
     user-select: none;
     cursor: pointer;
+    flex-shrink: 0;
     ${(p) => ButtonTypeMixin(p.type, p.theme)};
     ${(p) => ButtonPaddingMixin(p.icon, p.flag)};
 `;

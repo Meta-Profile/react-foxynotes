@@ -21,6 +21,6 @@ export const Input = styled.input`
 
     &:focus,
     &:active {
-        border: 1px solid ${(p) => p.theme.colors.black40};
+        border: 1px solid ${(p) => p.theme.colors.black40} !important;
     }
 `;

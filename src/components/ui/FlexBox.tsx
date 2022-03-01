@@ -13,6 +13,7 @@ export interface FlexBoxProps {
     gap?: SpaceType;
     justify?: FlexBoxJustify;
     align?: FlexBoxJustify;
+    flex?: number | string;
 }
 
 const FlexBoxStyleEnum = (keyword: string, item?: string) => {
@@ -32,4 +33,26 @@ export const FlexBox = styled(Box)<FlexBoxProps>`
     // Е нумераторы
     ${(p) => FlexBoxStyleEnum('justify-content', p.justify)};
     ${(p) => FlexBoxStyleEnum('align-items', p.align)};
+
+    ${(p) =>
+        p.flex
+            ? css`
+                  flex: ${p.flex};
+              `
+            : null};
+`;
+
+/**
+ * Флекс бокс колонка
+ */
+export const FlexBoxColumn = styled(FlexBox)<FlexBoxProps>`
+    flex-direction: column;
+`;
+
+/**
+ * Полностью о центрованный флекс бокс
+ */
+export const FlexBoxCenter = styled(FlexBox)<FlexBoxProps>`
+    justify-content: center;
+    align-items: center;
 `;

@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { FC, useMemo } from 'react';
-import { Box, BoxProps } from './Box';
-import { FlexBox } from './FlexBox';
+import { BoxProps } from './Box';
+import { FlexBoxCenter } from './FlexBox';
 import { IconDefinition, IconProp } from '@fortawesome/fontawesome-svg-core';
 import styled from 'styled-components';
 import {
@@ -10,7 +10,8 @@ import {
     faGhost,
     faMagnifyingGlass,
     faPencil,
-    faQrcode
+    faQrcode,
+    faShare,
 } from '@fortawesome/free-solid-svg-icons';
 
 export const dict: Record<string, IconDefinition> = {
@@ -19,7 +20,8 @@ export const dict: Record<string, IconDefinition> = {
     meta: faGhost,
     qr: faQrcode,
     'caret-down': faAngleDown,
-    search: faMagnifyingGlass
+    search: faMagnifyingGlass,
+    share: faShare,
 };
 
 export type IconType =
@@ -38,7 +40,7 @@ export interface IconProps extends BoxProps {
     type: IconType;
 }
 
-const IconWrapper = styled(FlexBox)`
+const IconWrapper = styled(FlexBoxCenter)`
     width: 20px;
     height: 20px;
     font-size: 15px;
@@ -55,7 +57,7 @@ export const Icon: FC<IconProps> = (props) => {
     const { type, ...boxProps } = props;
     const realName = useMemo(() => dict[type] ?? type, [type]);
     return (
-        <IconWrapper {...boxProps} justify={'center'} align={'center'} width={20} height={20}>
+        <IconWrapper {...boxProps} width={20} height={20}>
             <FontAwesomeIcon icon={realName as IconProp} />
         </IconWrapper>
     );
