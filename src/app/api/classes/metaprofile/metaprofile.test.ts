@@ -56,6 +56,6 @@ export const metaprofilemock = {
     ] as MFCategory[],
     fields: [],
     settings: {
-        color: '#e65b42',
+        color: '#FE6023',
     },
 };

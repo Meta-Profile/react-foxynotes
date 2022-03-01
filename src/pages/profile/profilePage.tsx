@@ -1,22 +1,60 @@
-import { FC, useEffect, useMemo } from 'react';
+import { FC, useEffect, useMemo, useState } from 'react';
 import { ProfilePageMainContainer, ProfilePageWrapper } from './styles';
-import { MFCEmpty, MfcHeader } from '../../components/metaFieldContainer';
+import {
+    MetaFieldContainer,
+    MFCBox,
+    MFCEmpty,
+    MfcHeader,
+} from '../../components/metaFieldContainer';
 import { ProfileBanner } from '../../components/profileBanner';
 import { metaprofilemock } from '../../app/api/classes/metaprofile/metaprofile.test';
-import { ThemeProvider } from 'styled-components';
+import { ThemeProvider, useTheme } from 'styled-components';
+import { SliderPicker } from 'react-color';
 import tinycolor2 from 'tinycolor2';
 
 export const ProfilePage: FC = () => {
     const profile = useMemo(() => metaprofilemock, []);
+    const [color, setColor] = useState(profile.settings.color);
+
+    // Themefy
+    const theme: any = useTheme();
+    const [newTheme, setNewTheme] = useState(theme);
+
     useEffect(() => {
+        const source = tinycolor2(color);
+        const primaryColor = source;
+        let secondaryColor = source.clone().lighten(28);
+        const bannerColor = source.clone().desaturate(27);
+        let i = 0;
+        if (secondaryColor.isLight()) {
+            while (!tinycolor2.isReadable(secondaryColor, primaryColor)) {
+                primaryColor.darken(1);
+                i++;
+                if (i >= 100) break;
+            }
+        } else {
+            while (!tinycolor2.isReadable(secondaryColor, primaryColor)) {
+                primaryColor.brighten(1);
+                i++;
+                if (i >= 100) break;
+            }
+        }
         document
             .querySelectorAll('meta[name="theme-color"]')
-            .forEach((value) => value.setAttribute('content', profile.settings.color));
-        const source = tinycolor2(profile.settings.color);
-        console.log(source);
-    }, [profile]);
+            .forEach((value) => value.setAttribute('content', bannerColor.toHexString()));
+
+        setNewTheme({
+            banner: bannerColor.toHexString(),
+            colors: {
+                ...theme.colors,
+                primary: primaryColor.toHexString(),
+                secondary: secondaryColor.toHexString(),
+            },
+        });
+    }, [theme, color]);
+
     return (
-        <ThemeProvider theme={{ banner: profile.settings.color }}>
+        <ThemeProvider theme={newTheme}>
             <ProfilePageWrapper>
                 <ProfileBanner
                     isEditable={true}
@@ -27,6 +65,14 @@ export const ProfilePage: FC = () => {
                 <ProfilePageMainContainer>
                     <MfcHeader type={profile.type} categories={profile.categories} />
                     <MFCEmpty />
+                    <MFCBox title={'Выбор цвета'}>
+                        <SliderPicker
+                            color={color}
+                            onChange={(v) => {
+                                setColor(v.hex);
+                            }}
+                        />
+                    </MFCBox>
                 </ProfilePageMainContainer>
             </ProfilePageWrapper>
         </ThemeProvider>

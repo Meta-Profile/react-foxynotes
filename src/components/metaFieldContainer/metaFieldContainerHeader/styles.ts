@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const MetaFieldContainerHeaderAvatar = styled.div`
     background: #fefefe;
-    border: 2px dashed #fe6023;
+    border: 2px dashed ${(p) => p.theme.colors.primary};
     box-sizing: border-box;
     border-radius: 1000px;
     width: 180px;
