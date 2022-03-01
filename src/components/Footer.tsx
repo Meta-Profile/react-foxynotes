@@ -1,10 +1,11 @@
-import { FC } from 'react';
+import { FC, useCallback, useEffect } from 'react';
 import { FlexBox } from './ui/FlexBox';
 import styled from 'styled-components';
 import { Space } from './ui/Box';
 import { Text } from './ui/Text';
 import { Divider } from './ui/Divider';
 import { useTranslation } from 'react-i18next';
+import { setLocalstorageLang } from '../common/language';
 
 const FooterWrapper = styled(FlexBox)`
     width: 100%;
@@ -23,14 +24,20 @@ const MayBeBold: FC<{ bold: boolean }> = (props) => {
 
 export const Footer: FC = () => {
     const { t, i18n } = useTranslation();
+    const changeLang = useCallback(
+        (lng: string) => {
+            i18n.changeLanguage(setLocalstorageLang(lng)).then();
+        },
+        [i18n.changeLanguage]
+    );
     return (
         <FooterWrapper color={'black40'} backgroundColor={'black5'} justify={'center'}>
             <FooterContainer column justify={'center'} gap>
                 <FlexBox gap={Space.small}>
-                    <Text type="small" onClick={() => i18n.changeLanguage('ru')}>
+                    <Text type="small" onClick={() => changeLang('ru')}>
                         <MayBeBold bold={i18n.language === 'ru'}>Русский</MayBeBold>
                     </Text>
-                    <Text type="small" onClick={() => i18n.changeLanguage('en')}>
+                    <Text type="small" onClick={() => changeLang('en')}>
                         <MayBeBold bold={i18n.language === 'en'}>English</MayBeBold>
                     </Text>
                 </FlexBox>

@@ -3,6 +3,7 @@ import { initReactI18next } from 'react-i18next';
 
 import ru from './translate/ru.json';
 import en from './translate/en.json';
+import { getActiveLang } from './common/language';
 
 declare module 'react-i18next' {
     interface CustomTypeOptions {
@@ -24,7 +25,7 @@ i18n.use(initReactI18next) // passes i18n down to react-i18next
             en: { translation: en },
             ru: { translation: ru },
         },
-        lng: 'en',
+        lng: getActiveLang(),
         fallbackLng: 'en',
 
         interpolation: {
