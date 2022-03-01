@@ -2,7 +2,7 @@ import { APIControllerResponse, APIOptions } from './types';
 
 export enum APIRequestMethod {
     POST = 'POST',
-    GET = 'GET'
+    GET = 'GET',
 }
 
 export class APIRequest {
@@ -17,7 +17,7 @@ export class APIRequest {
      * @private
      */
     private requestHeaders = new Headers({
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
     });
 
     /**
@@ -138,7 +138,7 @@ export class APIRequest {
             body:
                 this.requestMethod === APIRequestMethod.POST
                     ? JSON.stringify(this.requestBody)
-                    : undefined
+                    : undefined,
         };
     }
 

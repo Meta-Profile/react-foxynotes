@@ -5,8 +5,8 @@ import { AuthReducer } from '../app/auth/slice';
 export const store = configureStore({
     reducer: {
         loginPage: LoginPageSliceReducer,
-        auth: AuthReducer
-    }
+        auth: AuthReducer,
+    },
 });
 
 // Infer the `RootState` and `AppDispatch` types from the store itself

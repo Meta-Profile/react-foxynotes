@@ -14,12 +14,12 @@ export const AuthSlice = createSlice({
     name: 'auth',
     initialState: {
         token: '',
-        error: ''
+        error: '',
     },
     reducers: {
         updateToken: (state, action) => {
             state.token = action.payload;
-        }
+        },
     },
     extraReducers: {
         [loginAction.rejected.toString()]: (state, action) => {
@@ -33,8 +33,8 @@ export const AuthSlice = createSlice({
             state.token = response.token;
             state.error = '';
             localStorage.setItem('token', response.token);
-        }
-    }
+        },
+    },
 });
 
 export const AuthReducer = AuthSlice.reducer;

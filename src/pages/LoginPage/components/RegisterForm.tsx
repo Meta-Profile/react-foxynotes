@@ -22,7 +22,7 @@ export const RegisterForm: FC = (props) => {
                 username,
                 password,
                 email,
-                role: []
+                role: [],
             });
             toast.success('Ваш аккаунт успешно создан!');
             dispatch(updateForm('login'));

@@ -21,6 +21,6 @@ export const defaultTheme = {
         green: '#1CB92C',
         blue: '#2D9CDB',
         primary: '#FE6023',
-        secondary: '#FFF5F1'
-    } as Record<ColorType, string>
+        secondary: '#FFF5F1',
+    } as Record<ColorType, string>,
 };
