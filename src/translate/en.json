@@ -1,0 +1,21 @@
+{
+  "title": "Foxy Notes",
+  "login_title": "Foxy Notes",
+  "login_text": "Foxy Notes - the service that will change our life",
+  "login_form_username": "Email or your @metaId",
+  "login_form_password": "Password",
+  "login_form_signin": "Sign in",
+  "login_form_no": "Not have an account?",
+  "login_form_no_go": "Sign up",
+  "register_form_email": "Your email",
+  "register_form_username": "Create your @metaId",
+  "register_form_password": "Your password",
+  "register_form_signup": "Sign up",
+  "register_form_no": "Already have an account?",
+  "register_form_no_go": "Sign in",
+  "register_form_alert_success": "Your account has been created successful!",
+  "profile_color_chose": "Choose color",
+  "mpc_empty_title": "Empty foxy note",
+  "mpc_empty_text": "Foxy note is empty, add the first foxy note",
+  "mpc_empty_button_add": "Add foxy note"
+}

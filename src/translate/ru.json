@@ -1,0 +1,21 @@
+{
+  "title": "Foxy Notes",
+  "login_title": "Foxy Notes",
+  "login_text": "Foxy Notes - это сервис, меняющий взаимоотношения людей в лучшую сторону",
+  "login_form_username": "Email или Ваш @metaId",
+  "login_form_password": "Пароль",
+  "login_form_signin": "Войти",
+  "login_form_no": "Еще нет аккаунта?",
+  "login_form_no_go": "Создать аккаунт",
+  "register_form_email": "Ваш email",
+  "register_form_username": "Придумайте Ваш @metaId",
+  "register_form_password": "Ваш пароль",
+  "register_form_signup": "Создать аккаунт",
+  "register_form_no": "Уже есть аккаунт?",
+  "register_form_no_go": "Войти",
+  "register_form_alert_success": "Ваш аккаунт успешно создан!",
+  "profile_color_chose": "Выбор цвета",
+  "mpc_empty_title": "Пустой мета профиль",
+  "mpc_empty_text": "Мета профиль пока еще пустой, добавьте первое foxy поле",
+  "mpc_empty_button_add": "Добавить foxy поле"
+}

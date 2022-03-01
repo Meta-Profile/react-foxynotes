@@ -10,6 +10,8 @@ import { Themes } from './components/ui/theme';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+import './i18n';
+
 render(
     <Provider store={store}>
         <ThemeProvider theme={Themes.default}>

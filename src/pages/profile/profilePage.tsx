@@ -11,9 +11,12 @@ import { metaprofilemock } from '../../app/api/classes/metaprofile/metaprofile.t
 import { ThemeProvider, useTheme } from 'styled-components';
 import { SliderPicker } from 'react-color';
 import tinycolor2 from 'tinycolor2';
+import { useTranslation } from 'react-i18next';
+import { Footer } from '../../components/Footer';
 
 export const ProfilePage: FC = () => {
-    const profile = useMemo(() => metaprofilemock, []);
+    const { t, i18n } = useTranslation();
+    const profile = useMemo(() => (metaprofilemock as any)[i18n.language], [i18n.language]);
     const [color, setColor] = useState(profile.settings.color);
 
     // Themefy
@@ -65,7 +68,7 @@ export const ProfilePage: FC = () => {
                 <ProfilePageMainContainer>
                     <MfcHeader type={profile.type} categories={profile.categories} />
                     <MFCEmpty />
-                    <MFCBox title={'Выбор цвета'}>
+                    <MFCBox title={t('profile_color_chose')}>
                         <SliderPicker
                             color={color}
                             onChange={(v) => {
@@ -75,6 +78,7 @@ export const ProfilePage: FC = () => {
                     </MFCBox>
                 </ProfilePageMainContainer>
             </ProfilePageWrapper>
+            <Footer />
         </ThemeProvider>
     );
 };

@@ -8,9 +8,11 @@ import { toast } from 'react-toastify';
 import { useDispatch } from 'react-redux';
 import { updateForm } from '../LoginPageSlice';
 import { AuthAPI } from '../../../app/api';
+import { useTranslation } from 'react-i18next';
 
 export const RegisterForm: FC = (props) => {
     const dispatch = useDispatch();
+    const { t } = useTranslation();
 
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
@@ -24,7 +26,7 @@ export const RegisterForm: FC = (props) => {
                 email,
                 role: [],
             });
-            toast.success('Ваш аккаунт успешно создан!');
+            toast.success(t('register_form_alert_success'));
             dispatch(updateForm('login'));
         } catch (e: any) {
             toast.error(e.error);
@@ -42,7 +44,7 @@ export const RegisterForm: FC = (props) => {
                 onInput={(event) => setEmail(event.currentTarget.value)}
                 type="text"
                 name="email"
-                placeholder="Ваш email"
+                placeholder={t('register_form_email')}
             />
 
             <Input
@@ -50,23 +52,23 @@ export const RegisterForm: FC = (props) => {
                 onInput={(event) => setUsername(event.currentTarget.value)}
                 type="text"
                 name="login"
-                placeholder="Придумайте Ваш @metaId"
+                placeholder={t('register_form_email')}
             />
             <Input
                 value={password}
                 onInput={(event) => setPassword(event.currentTarget.value)}
                 type="password"
                 name="password"
-                placeholder="Ваш пароль"
+                placeholder={t('register_form_password')}
             />
             <Button onClick={onButtonClick} type={'black'}>
-                Создать аккаунт
+                {t('register_form_signup')}
             </Button>
             <Divider />
             <TextFlexBox justify={'center'} align={'center'} color={'black100'}>
-                Уже есть аккаунт?&nbsp;
+                {t('register_form_no')}&nbsp;
                 <Text onClick={onSwitchFormClick} color={'black40'}>
-                    Войти
+                    {t('register_form_no_go')}
                 </Text>
             </TextFlexBox>
         </LoginFormWrapper>

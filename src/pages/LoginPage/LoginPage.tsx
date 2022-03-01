@@ -7,18 +7,18 @@ import { Footer } from '../../components/Footer';
 import { useSelector } from 'react-redux';
 import { LoginPageSelector } from './selectors';
 import { RegisterForm } from './components/RegisterForm';
+import { useTranslation } from 'react-i18next';
 
 export const LoginPage: FC = () => {
     const { form } = useSelector(LoginPageSelector);
+    const { t } = useTranslation();
 
     return (
         <FlexBox column align={'center'} minHeight={'100vh'}>
             <LoginContainer padding>
                 <FlexBox column justify={'center'} gap>
-                    <Text type={'title'}>Foxy Notes</Text>
-                    <Text type={'normal'}>
-                        Foxy Notes - это сервис, меняющий взаимоотношения людей в лучшую сторону.
-                    </Text>
+                    <Text type={'title'}>{t('login_title')}</Text>
+                    <Text type={'normal'}>{t('login_text')}</Text>
                 </FlexBox>
                 {form === 'login' ? <LoginForm /> : <RegisterForm />}
             </LoginContainer>
