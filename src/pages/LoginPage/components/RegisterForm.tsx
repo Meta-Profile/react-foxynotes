@@ -52,7 +52,7 @@ export const RegisterForm: FC = (props) => {
                 onInput={(event) => setUsername(event.currentTarget.value)}
                 type="text"
                 name="login"
-                placeholder={t('register_form_email')}
+                placeholder={t('register_form_username')}
             />
             <Input
                 value={password}
