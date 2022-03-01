@@ -6,7 +6,7 @@ import { store } from './store';
 import { Provider } from 'react-redux';
 import { Reset } from './components/ui/Reset';
 import { ThemeProvider } from 'styled-components';
-import { Themes } from './app/theme';
+import { Themes } from './components/ui/theme';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 

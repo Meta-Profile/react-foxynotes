@@ -1,6 +1,6 @@
 import styled, { css, DefaultTheme } from 'styled-components';
-import { ColorType } from '../../app/theme/types';
-import { defaultTheme } from '../../app/theme/defaultTheme';
+import { ColorType } from './theme/types';
+import { defaultTheme } from './theme/defaultTheme';
 
 export enum Space {
     small = 8,

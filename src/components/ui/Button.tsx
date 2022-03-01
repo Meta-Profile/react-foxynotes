@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components';
-import { defaultTheme } from '../../app/theme/defaultTheme';
+import { defaultTheme } from './theme/defaultTheme';
 import { FC } from 'react';
 import { BoxProps, Space } from './Box';
 import { FlexBox } from './FlexBox';
