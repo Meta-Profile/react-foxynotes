@@ -15,7 +15,10 @@
   "register_form_no_go": "Войти",
   "register_form_alert_success": "Ваш аккаунт успешно создан!",
   "profile_color_chose": "Выбор цвета",
-  "mpc_empty_title": "Пустой foxy note",
+  "mpc_empty_title": "Пустой мета профиль",
   "mpc_empty_text": "Мета профиль пока еще пустой, добавьте первое foxy поле",
-  "mpc_empty_button_add": "Добавить foxy поле"
+  "mpc_empty_button_add": "Добавить мета поле",
+  "modal_title_add_meta_field": "Добавить мета поле",
+  "input_search_loading": "Загрузка: ",
+  "input_search_not_found": "Ничего не найдено по запросу: "
 }

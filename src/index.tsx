@@ -4,7 +4,7 @@ import reportWebVitals from './reportWebVitals';
 import { Router } from './router/routes';
 import { store } from './store';
 import { Provider } from 'react-redux';
-import { Reset } from './components/ui/Reset';
+import { Reset } from './components/ui';
 import { ThemeProvider } from 'styled-components';
 import { Themes } from './components/ui/theme';
 import { ToastContainer } from 'react-toastify';

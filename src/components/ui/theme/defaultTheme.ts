@@ -1,5 +1,10 @@
 import { ColorType } from './types';
 
+const white = '#FEFEFE';
+
+const black100 = '#151514';
+const blackAbsolute = '#000000';
+
 export const defaultTheme = {
     colors: {
         black3: '#FBFBFB',
@@ -11,10 +16,10 @@ export const defaultTheme = {
         black70: '#5D5D5D',
         black90: '#2C2C2B',
         black95: '#292929',
-        black100: '#151514',
-        blackAbsolute: '#000000',
+        black100: black100,
+        blackAbsolute: blackAbsolute,
 
-        white: '#FEFEFE',
+        white,
         whiteAbsolute: '#FFFFFF',
 
         red: '#EE2D0B',
@@ -22,5 +27,11 @@ export const defaultTheme = {
         blue: '#2D9CDB',
         primary: '#FE6023',
         secondary: '#FFF5F1',
+        secondary30: 'rgba(255,245,241, 0.9)',
     } as Record<ColorType, string>,
+
+    modal: {
+        backgroundColor: white,
+        color: blackAbsolute,
+    },
 };

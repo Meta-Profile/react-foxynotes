@@ -5,7 +5,7 @@ export const Input = styled.input`
     background-color: ${(p) => p.theme.colors.black5};
     border: 1px solid ${(p) => p.theme.colors.black5};
     outline: none !important;
-    padding: 0 16px;
+    padding: 0 8px;
     border-radius: 3px;
     transition: all 0.2s;
 

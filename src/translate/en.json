@@ -15,7 +15,10 @@
   "register_form_no_go": "Sign in",
   "register_form_alert_success": "Your account has been created successful!",
   "profile_color_chose": "Choose color",
-  "mpc_empty_title": "Empty foxy note",
-  "mpc_empty_text": "Foxy note is empty, add the first foxy note",
-  "mpc_empty_button_add": "Add foxy note"
+  "mpc_empty_title": "Empty Meta Profile",
+  "mpc_empty_text": "Meta Profile is empty, add the first foxy note",
+  "mpc_empty_button_add": "Add foxy note",
+  "modal_title_add_meta_field": "Add meta field",
+  "input_search_loading": "Loading: ",
+  "input_search_not_found": "Not found: "
 }

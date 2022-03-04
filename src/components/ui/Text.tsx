@@ -15,6 +15,15 @@ export interface TextProps {
     type?: TextType;
 }
 
+export const TextCss = {
+    small: css`
+        font-style: normal;
+        font-weight: normal;
+        font-size: 15px;
+        line-height: 20px;
+    `,
+};
+
 const TextSize = (type: TextType) => {
     switch (type) {
         case 'normal':
@@ -66,12 +75,7 @@ const TextSize = (type: TextType) => {
             `;
         case 'small':
         default:
-            return css`
-                font-style: normal;
-                font-weight: normal;
-                font-size: 15px;
-                line-height: 20px;
-            `;
+            return TextCss.small;
     }
 };
 

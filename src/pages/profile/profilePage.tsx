@@ -1,11 +1,6 @@
 import { FC, useEffect, useMemo, useState } from 'react';
 import { ProfilePageMainContainer, ProfilePageWrapper } from './styles';
-import {
-    MetaFieldContainer,
-    MFCBox,
-    MFCEmpty,
-    MfcHeader,
-} from '../../components/metaFieldContainer';
+import { MFCEmpty, MfcHeader } from '../../components/metaFieldContainer';
 import { ProfileBanner } from '../../components/profileBanner';
 import { metaprofilemock } from '../../app/api/classes/metaprofile/metaprofile.test';
 import { ThemeProvider, useTheme } from 'styled-components';
@@ -13,6 +8,7 @@ import { SliderPicker } from 'react-color';
 import tinycolor2 from 'tinycolor2';
 import { useTranslation } from 'react-i18next';
 import { Footer } from '../../components/Footer';
+import { MCAddMetaField, ModalContainer } from '../../components/modals';
 
 export const ProfilePage: FC = () => {
     const { t, i18n } = useTranslation();
@@ -68,17 +64,18 @@ export const ProfilePage: FC = () => {
                 <ProfilePageMainContainer>
                     <MfcHeader type={profile.type} categories={profile.categories} />
                     <MFCEmpty />
-                    <MFCBox title={t('profile_color_chose')}>
+                    {/* <MFCBox title={t('profile_color_chose')}>
                         <SliderPicker
                             color={color}
                             onChange={(v) => {
                                 setColor(v.hex);
                             }}
                         />
-                    </MFCBox>
+                    </MFCBox>*/}
                 </ProfilePageMainContainer>
             </ProfilePageWrapper>
             <Footer />
+            <MCAddMetaField />
         </ThemeProvider>
     );
 };
