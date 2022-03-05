@@ -4,13 +4,13 @@ import { API_ENDPOINT } from '../../../../config/api';
 
 export class MetaProfileAPI {
     public static async categories(q?: string, lang: string = 'ru') {
-        return await new APIRequest(API_ENDPOINT + '/metaprofile/categories')
+        return await new APIRequest(API_ENDPOINT + '/mp/categories')
             .get()
             .query('q', q)
             .release<MetaProfileCategory[]>();
     }
     public static async fields(mpcId: number, q?: string, lang: string = 'ru') {
-        return await new APIRequest(API_ENDPOINT + '/metaprofile/fields')
+        return await new APIRequest(API_ENDPOINT + '/mp/fields')
             .get()
             .query('q', q)
             .query('mpcId', mpcId)
