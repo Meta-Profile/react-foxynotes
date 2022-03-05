@@ -19,7 +19,8 @@
   "mpc_empty_text": "Meta Profile is empty, add the first foxy note",
   "mpc_empty_button_add": "Add foxy note",
   "modal_title_add_meta_field": "Add meta field",
-  "modal_button_add_meta_field": "Add meta field",
+  "modal_button_add": "Add",
+  "modal_button_cancel": "Cancel",
   "input_search_loading": "Loading: ",
   "input_search_not_found": "Not found: "
 }
