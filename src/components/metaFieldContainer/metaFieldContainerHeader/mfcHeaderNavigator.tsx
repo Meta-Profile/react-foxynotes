@@ -1,12 +1,12 @@
 import { FC } from 'react';
 import { MFCHeaderNavigatorWrapper } from './styles';
 import { FlexBox } from '../../ui/FlexBox';
-import { MFCategory } from '../../../app/api/classes/metaprofile/types';
+import { MetaProfileCategory } from '../../../app/api/classes/metaprofile/types';
 import { Button } from '../../ui/Button';
 import { IconType } from '../../ui/Icon';
 
 export interface MFCHeaderNavigatorProps {
-    categories: MFCategory[];
+    categories: MetaProfileCategory[];
 }
 
 export const MFCHeaderNavigator: FC<MFCHeaderNavigatorProps> = (props) => {
@@ -15,7 +15,7 @@ export const MFCHeaderNavigator: FC<MFCHeaderNavigatorProps> = (props) => {
         <MFCHeaderNavigatorWrapper>
             <FlexBox gap>
                 {categories.map((value) => (
-                    <Button type={'secondary'} icon={value.icon as IconType} key={value.mfcId}>
+                    <Button type={'secondary'} icon={value.icon as IconType} key={value.mpcId}>
                         {value.title}
                     </Button>
                 ))}

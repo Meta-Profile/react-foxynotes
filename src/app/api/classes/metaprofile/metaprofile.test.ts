@@ -1,4 +1,4 @@
-import { MFCategory, MFType } from './types';
+import { MetaProfileCategory, MFType } from './types';
 
 export const metaprofilemockRu = {
     title: 'Екатерина Крамер',
@@ -9,51 +9,51 @@ export const metaprofilemockRu = {
     } as MFType,
     categories: [
         {
-            mfcId: 1,
+            mpcId: 1,
             title: 'Основное',
             icon: 'meta',
         },
         {
-            mfcId: 2,
+            mpcId: 2,
             title: 'Параметры тела',
             icon: 'meta',
         },
         {
-            mfcId: 3,
+            mpcId: 3,
             title: 'Одежда',
             icon: 'meta',
         },
         {
-            mfcId: 4,
+            mpcId: 4,
             title: 'Здоровье',
             icon: 'meta',
         },
         {
-            mfcId: 5,
+            mpcId: 5,
             title: 'Интересы',
             icon: 'meta',
         },
         {
-            mfcId: 6,
+            mpcId: 6,
             title: 'Семья',
             icon: 'meta',
         },
         {
-            mfcId: 7,
+            mpcId: 7,
             title: 'Вкусы',
             icon: 'meta',
         },
         {
-            mfcId: 8,
+            mpcId: 8,
             title: 'Социальные сети',
             icon: 'meta',
         },
         {
-            mfcId: 9,
+            mpcId: 9,
             title: 'Адрес',
             icon: 'meta',
         },
-    ] as MFCategory[],
+    ] as MetaProfileCategory[],
     fields: [],
     settings: {
         color: '#FE6023',
@@ -69,51 +69,51 @@ export const metaprofilemockEn = {
     } as MFType,
     categories: [
         {
-            mfcId: 1,
+            mpcId: 1,
             title: 'General',
             icon: 'meta',
         },
         {
-            mfcId: 2,
+            mpcId: 2,
             title: 'Body measurements',
             icon: 'meta',
         },
         {
-            mfcId: 3,
+            mpcId: 3,
             title: 'Clothes',
             icon: 'meta',
         },
         {
-            mfcId: 4,
+            mpcId: 4,
             title: 'Health',
             icon: 'meta',
         },
         {
-            mfcId: 5,
+            mpcId: 5,
             title: 'Interests',
             icon: 'meta',
         },
         {
-            mfcId: 6,
+            mpcId: 6,
             title: 'Family',
             icon: 'meta',
         },
         {
-            mfcId: 7,
+            mpcId: 7,
             title: 'Tastes',
             icon: 'meta',
         },
         {
-            mfcId: 8,
+            mpcId: 8,
             title: 'Social networks',
             icon: 'meta',
         },
         {
-            mfcId: 9,
+            mpcId: 9,
             title: 'Address',
             icon: 'meta',
         },
-    ] as MFCategory[],
+    ] as MetaProfileCategory[],
     fields: [],
     settings: {
         color: '#FE6023',

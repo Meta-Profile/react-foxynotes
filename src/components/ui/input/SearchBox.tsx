@@ -11,7 +11,6 @@ import { useTranslation } from 'react-i18next';
 // };
 
 const IndicatorsContainer = (props: IndicatorsContainerProps<any, true>) => {
-    console.log(props);
     return (
         <div className={'rc__control-search'}>
             <Icon type={'search'} />
@@ -22,16 +21,30 @@ const IndicatorsContainer = (props: IndicatorsContainerProps<any, true>) => {
 export interface SearchBoxProps<T, IsTags> {
     isTags?: true | undefined;
     isCreatable?: true | undefined;
-    onSearch?: (input: string) => Promise<T[]>;
+    onSearch?: (input: string, cb?: any) => Promise<T[]>;
     placeholder?: string;
     value?: IsTags extends true ? T[] : T;
     onChange?: (value: IsTags extends true ? T[] : T) => void;
     onCreate?: (value: string) => void;
+    defaultOptions?: T[];
+    keyIndex?: string;
+    valueIndex?: string;
 }
 
 export function SearchBox<T, IsTags>(props: SearchBoxProps<T, IsTags>) {
     const { t } = useTranslation();
-    const { isTags, isCreatable, onSearch, value, onChange, placeholder, onCreate } = props;
+    const {
+        isTags,
+        isCreatable,
+        onSearch,
+        value,
+        onChange,
+        placeholder,
+        onCreate,
+        defaultOptions,
+        keyIndex,
+        valueIndex,
+    } = props;
 
     const noOptionsMessage = ({ inputValue }: { inputValue: string }) => (
         <span>
@@ -56,6 +69,8 @@ export function SearchBox<T, IsTags>(props: SearchBoxProps<T, IsTags>) {
                         IndicatorSeparator: null,
                         IndicatorsContainer,
                     }}
+                    getOptionLabel={keyIndex ? (p: any) => p[keyIndex] : undefined}
+                    getOptionValue={valueIndex ? (p: any) => p[valueIndex] : undefined}
                     classNamePrefix={'rc'}
                     placeholder={placeholder}
                     noOptionsMessage={noOptionsMessage}
@@ -64,6 +79,7 @@ export function SearchBox<T, IsTags>(props: SearchBoxProps<T, IsTags>) {
                     onChange={onChange as any}
                     onCreateOption={onCreate}
                     defaultValue={value}
+                    defaultOptions={defaultOptions as any}
                 />
             </SearchBoxWrapper>
         );
@@ -76,6 +92,8 @@ export function SearchBox<T, IsTags>(props: SearchBoxProps<T, IsTags>) {
                     IndicatorSeparator: null,
                     IndicatorsContainer,
                 }}
+                getOptionLabel={keyIndex ? (p: any) => p[keyIndex] : undefined}
+                getOptionValue={valueIndex ? (p: any) => p[valueIndex] : undefined}
                 classNamePrefix={'rc'}
                 placeholder={placeholder}
                 noOptionsMessage={noOptionsMessage}
@@ -83,6 +101,7 @@ export function SearchBox<T, IsTags>(props: SearchBoxProps<T, IsTags>) {
                 loadOptions={onSearch}
                 onChange={onChange as any}
                 defaultValue={value}
+                defaultOptions={defaultOptions as any}
             />
         </SearchBoxWrapper>
     );

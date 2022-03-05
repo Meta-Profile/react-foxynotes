@@ -1,4 +1,5 @@
 import { APIControllerResponse, APIOptions } from './types';
+import * as querystring from 'querystring';
 
 export enum APIRequestMethod {
     POST = 'POST',
@@ -121,9 +122,14 @@ export class APIRequest {
      */
     public createBaseUrl(): string {
         if (this.requestQuery.length === 0) return this.requestUrl;
+
         const request = new URLSearchParams();
-        for (const value of this.requestQuery) request.append(value.key, value.value);
-        return this.requestUrl + '?' + request.toString();
+        for (const value of this.requestQuery) {
+            request.append(value.key, value.value);
+        }
+        // request.append('lang', this.requestLang);
+        const str = request.toString();
+        return this.requestUrl + '?' + str;
     }
 
     /**
@@ -147,7 +153,7 @@ export class APIRequest {
      */
     public async send(): Promise<Response> {
         const options = this.createBaseRequest();
-        return await fetch(this.requestUrl, options);
+        return await fetch(options.url ?? this.requestUrl, options);
     }
 
     /**

@@ -1,5 +1,6 @@
 import { APIRequest } from '../APIRequest';
 import { JwtResponse } from '../types';
+import { API_ENDPOINT } from '../../../config/api';
 
 export interface SigninProps {
     username: string;
@@ -15,7 +16,7 @@ export interface SignupProps extends SigninProps {
  * API класс авторизации
  */
 export class APIClassAuth {
-    protected url = 'https://api.metauser.ru/api/v1/auth';
+    protected url = API_ENDPOINT + '/auth';
 
     /**
      * Выполняет авторизацию
