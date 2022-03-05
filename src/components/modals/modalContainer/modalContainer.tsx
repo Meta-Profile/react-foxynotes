@@ -4,10 +4,11 @@ import { Text } from '../../ui';
 
 export interface ModalContainerProps {
     title?: string;
+    onBackdropClick?: () => void;
 }
 
 export const ModalContainer: FC<ModalContainerProps> = (props) => {
-    const { children, title } = props;
+    const { children, title, onBackdropClick } = props;
 
     const lockScroll = useCallback(() => {
         document.body.style.overflow = 'hidden';
@@ -23,8 +24,8 @@ export const ModalContainer: FC<ModalContainerProps> = (props) => {
     }, []);
 
     return (
-        <ModalWrapper>
-            <ModalContainerWrapper>
+        <ModalWrapper onClick={onBackdropClick}>
+            <ModalContainerWrapper onClick={(ev) => ev.stopPropagation()}>
                 {title && <Text type={'normal'}>{title}</Text>}
                 {children}
             </ModalContainerWrapper>

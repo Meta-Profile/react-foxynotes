@@ -12,6 +12,8 @@ import {
     faPencil,
     faQrcode,
     faShare,
+    faX,
+    faCheck,
 } from '@fortawesome/free-solid-svg-icons';
 
 export const dict: Record<string, IconDefinition> = {
@@ -22,6 +24,8 @@ export const dict: Record<string, IconDefinition> = {
     'caret-down': faAngleDown,
     search: faMagnifyingGlass,
     share: faShare,
+    x: faX,
+    check: faCheck,
 };
 
 export type IconType =

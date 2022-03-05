@@ -1,4 +1,3 @@
-import { useDebouncedCallback } from 'use-debounce';
 import { MetaProfileAPI } from '../app/api';
 import { useTranslation } from 'react-i18next';
 import { useCallback, useEffect, useState } from 'react';
@@ -7,14 +6,24 @@ import { MetaProfileCategory } from '../app/api/classes/metaprofile/types';
 export const useApiMetaProfileCategories = () => {
     const { i18n } = useTranslation();
     const [data, setData] = useState<MetaProfileCategory[]>([]);
+
     useEffect(() => {
         MetaProfileAPI.categories(undefined, i18n.language).then((v) => setData(v.response));
     }, [i18n]);
     return data;
 };
 
-export const useApiMetaProfileCategoriesSearch = () => {
-    const { i18n } = useTranslation();
+export const useApiMetaProfileCategoriesFetch = (
+    lang: string
+): [MetaProfileCategory[], () => void] => {
+    const [data, setData] = useState<MetaProfileCategory[]>([]);
+    const fetch = useCallback(() => {
+        MetaProfileAPI.categories(undefined, lang).then((v) => setData(v.response));
+    }, [lang]);
+    return [data, fetch];
+};
+
+export const useApiMetaProfileCategoriesSearch = (lang: string) => {
     const [timer, setTimer] = useState<any>();
     const search = useCallback(
         (str: string, cb: any) => {
@@ -23,12 +32,12 @@ export const useApiMetaProfileCategoriesSearch = () => {
                     clearTimeout(prev);
                 }
                 return setTimeout(async () => {
-                    const res = await MetaProfileAPI.categories(str, i18n.language);
+                    const res = await MetaProfileAPI.categories(str, lang);
                     cb(res.response);
                 }, 500);
             });
         },
-        [i18n]
+        [lang]
     );
 
     return search;

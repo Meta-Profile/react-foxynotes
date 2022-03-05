@@ -19,6 +19,8 @@
   "mpc_empty_text": "Мета профиль пока еще пустой, добавьте первое foxy поле",
   "mpc_empty_button_add": "Добавить мета поле",
   "modal_title_add_meta_field": "Добавить мета поле",
+  "modal_button_add": "Добавить",
+  "modal_button_cancel": "Отменить",
   "input_search_loading": "Загрузка: ",
   "input_search_not_found": "Ничего не найдено по запросу: "
 }

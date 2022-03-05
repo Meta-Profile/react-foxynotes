@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import { FlexBoxColumn } from '../../ui/FlexBox';
 import { Space } from '../../ui/Box';
 
@@ -16,6 +16,17 @@ export const ModalWrapper = styled.div`
     backdrop-filter: blur(20px);
 `;
 
+const ModalContainerWrapperAnimation = keyframes`
+  0%{
+    transform: translateY(-30px) scale(1.05);
+    opacity: 0;
+  }
+  100%{
+    transform: translateY(0px) scale(1);
+    opacity: 1;
+  }
+`;
+
 export const ModalContainerWrapper = styled(FlexBoxColumn)`
     align-items: center;
     flex: 1;
@@ -26,4 +37,5 @@ export const ModalContainerWrapper = styled(FlexBoxColumn)`
     border-radius: 10px;
     min-width: 425px;
     max-width: 500px;
+    animation: ${ModalContainerWrapperAnimation} 0.5s forwards;
 `;

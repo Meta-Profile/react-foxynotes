@@ -1,4 +1,4 @@
-import { MetaProfileCategory } from './types';
+import { MetaProfileCategory, MetaProfileField } from './types';
 import { APIRequest } from '../../APIRequest';
 import { API_ENDPOINT } from '../../../../config/api';
 
@@ -14,6 +14,6 @@ export class MetaProfileAPI {
             .get()
             .query('q', q)
             .query('mpcId', mpcId)
-            .release<MetaProfileCategory[]>();
+            .release<MetaProfileField[]>();
     }
 }

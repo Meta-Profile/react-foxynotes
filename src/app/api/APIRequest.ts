@@ -67,6 +67,7 @@ export class APIRequest {
      * @param value
      */
     public query<T>(key: string, value: T | T[]): APIRequest {
+        if (value === undefined) return this;
         if (value instanceof Array && value.length > 0) {
             for (const v of value) this.requestQuery.push({ key, value: String(v) });
         } else {

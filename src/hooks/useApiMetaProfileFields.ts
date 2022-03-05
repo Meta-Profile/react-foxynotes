@@ -1,19 +1,21 @@
 import { MetaProfileAPI } from '../app/api';
-import { useTranslation } from 'react-i18next';
-import { useCallback, useEffect, useState } from 'react';
-import { MetaProfileCategory } from '../app/api/classes/metaprofile/types';
+import { useCallback, useState } from 'react';
+import { MetaProfileField } from '../app/api/classes/metaprofile/types';
 
-export const useApiMetaProfileFields = (mpcId: number) => {
-    const { i18n } = useTranslation();
-    const [data, setData] = useState<MetaProfileCategory[]>([]);
-    useEffect(() => {
-        MetaProfileAPI.fields(mpcId, undefined, i18n.language).then((v) => setData(v.response));
-    }, [i18n, mpcId]);
-    return data;
+export const useApiMetaProfileFieldsFetch = (
+    lang: string
+): [MetaProfileField[], (mpcId: number) => void] => {
+    const [data, setData] = useState<MetaProfileField[]>([]);
+    const fetch = useCallback(
+        (mpcId: number) => {
+            MetaProfileAPI.fields(mpcId, undefined, lang).then((v) => setData(v.response));
+        },
+        [lang]
+    );
+    return [data, fetch];
 };
 
-export const useApiMetaProfileFieldsSearch = () => {
-    const { i18n } = useTranslation();
+export const useApiMetaProfileFieldsSearch = (lang: string) => {
     const [timer, setTimer] = useState<any>();
     const search = useCallback(
         (mpcId?: number) => (str: string, cb: any) => {
@@ -22,12 +24,12 @@ export const useApiMetaProfileFieldsSearch = () => {
                     clearTimeout(prev);
                 }
                 return setTimeout(async () => {
-                    const res = await MetaProfileAPI.fields(mpcId ?? -1, str, i18n.language);
+                    const res = await MetaProfileAPI.fields(mpcId ?? -1, str, lang);
                     cb(res.response);
                 }, 500);
             });
         },
-        [i18n]
+        [lang]
     );
 
     return search;

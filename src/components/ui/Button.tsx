@@ -11,6 +11,7 @@ export interface ButtonProps extends BoxProps {
     type?: ButtonType;
     icon?: IconType;
     onClick?: () => void;
+    disabled?: boolean;
 }
 
 const ButtonTypeMixin = (type?: ButtonType, theme?: typeof defaultTheme) => {
@@ -71,12 +72,27 @@ export const ButtonWrapper = styled(FlexBox)<ButtonProps & { flag: boolean }>`
     flex-shrink: 0;
     ${(p) => ButtonTypeMixin(p.type, p.theme)};
     ${(p) => ButtonPaddingMixin(p.icon, p.flag)};
+
+    ${(p) =>
+        p.disabled
+            ? css`
+                  //color: ${p.theme.colors.black70} !important;
+                  //background-color: ${p.theme.colors.black20} !important;
+                  opacity: 0.8;
+                  cursor: not-allowed;
+              `
+            : null};
 `;
 
 export const Button: FC<ButtonProps> = (props) => {
-    const { children, onClick, ...wrapperProps } = props;
+    const { children, onClick, disabled, ...wrapperProps } = props;
     return (
-        <ButtonWrapper onClick={onClick} {...wrapperProps} flag={!!children} gap={Space.small}>
+        <ButtonWrapper
+            disabled={disabled}
+            onClick={onClick && !disabled ? onClick : undefined}
+            {...wrapperProps}
+            flag={!!children}
+            gap={Space.small}>
             {wrapperProps.icon ? <Icon type={wrapperProps.icon} /> : null}
             {children}
         </ButtonWrapper>

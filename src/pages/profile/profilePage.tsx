@@ -4,23 +4,22 @@ import { MFCEmpty, MfcHeader } from '../../components/metaFieldContainer';
 import { ProfileBanner } from '../../components/profileBanner';
 import { metaprofilemock } from '../../app/api/classes/metaprofile/metaprofile.test';
 import { ThemeProvider, useTheme } from 'styled-components';
-import { SliderPicker } from 'react-color';
 import tinycolor2 from 'tinycolor2';
 import { useTranslation } from 'react-i18next';
 import { Footer } from '../../components/Footer';
-import { MCAddMetaField, ModalContainer } from '../../components/modals';
+import { MCAddMetaField } from '../../components/modals';
 
 export const ProfilePage: FC = () => {
     const { t, i18n } = useTranslation();
     const profile = useMemo(() => (metaprofilemock as any)[i18n.language], [i18n.language]);
-    const [color, setColor] = useState(profile.settings.color);
+    const [modalAddFieldVisible, setModalAddFieldVisible] = useState(false);
 
     // Themefy
     const theme: any = useTheme();
     const [newTheme, setNewTheme] = useState(theme);
 
     useEffect(() => {
-        const source = tinycolor2(color);
+        const source = tinycolor2(profile.settings.color);
         const primaryColor = source;
         let secondaryColor = source.clone().lighten(28);
         const bannerColor = source.clone().desaturate(27);
@@ -50,7 +49,7 @@ export const ProfilePage: FC = () => {
                 secondary: secondaryColor.toHexString(),
             },
         });
-    }, [theme, color]);
+    }, [theme, profile]);
 
     return (
         <ThemeProvider theme={newTheme}>
@@ -63,7 +62,7 @@ export const ProfilePage: FC = () => {
                 />
                 <ProfilePageMainContainer>
                     <MfcHeader type={profile.type} categories={profile.categories} />
-                    <MFCEmpty />
+                    <MFCEmpty onAddClick={() => setModalAddFieldVisible(true)} />
                     {/* <MFCBox title={t('profile_color_chose')}>
                         <SliderPicker
                             color={color}
@@ -75,7 +74,9 @@ export const ProfilePage: FC = () => {
                 </ProfilePageMainContainer>
             </ProfilePageWrapper>
             <Footer />
-            <MCAddMetaField />
+            {modalAddFieldVisible && (
+                <MCAddMetaField onClose={() => setModalAddFieldVisible(false)} />
+            )}
         </ThemeProvider>
     );
 };

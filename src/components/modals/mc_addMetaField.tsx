@@ -1,25 +1,50 @@
-import { FC, useCallback, useState } from 'react';
+import { FC, useCallback, useEffect, useState } from 'react';
 import { ModalContainer } from './modalContainer';
 import { useTranslation } from 'react-i18next';
-import { Box, SearchBox } from '../ui';
-import { MetaProfileAPI } from '../../app/api';
-import i18next from 'i18next';
-import debounce from 'lodash.debounce';
-import { MetaProfileCategory } from '../../app/api/classes/metaprofile/types';
-import { useApiMetaProfileCategoriesSearch } from '../../hooks/useApiMetaProfileCategories';
-import { useApiMetaProfileFieldsSearch } from '../../hooks/useApiMetaProfileFields';
+import { Box, Button, FlexBox, SearchBox } from '../ui';
+import { MetaProfileCategory, MetaProfileField } from '../../app/api/classes/metaprofile/types';
+import {
+    useApiMetaProfileCategoriesFetch,
+    useApiMetaProfileCategoriesSearch,
+} from '../../hooks/useApiMetaProfileCategories';
+import {
+    useApiMetaProfileFieldsFetch,
+    useApiMetaProfileFieldsSearch,
+} from '../../hooks/useApiMetaProfileFields';
 
-export const MCAddMetaField: FC = () => {
-    const { t } = useTranslation();
+export interface MCAddMetaFieldProps {
+    onClose?: () => void;
+    onAdd?: (category: MetaProfileCategory, field: MetaProfileField) => void;
+}
+
+export const MCAddMetaField: FC<MCAddMetaFieldProps> = (props) => {
+    const { onClose, onAdd } = props;
+    const { t, i18n } = useTranslation();
     const [category, setCategory] = useState<MetaProfileCategory>();
+    const [field, setField] = useState<MetaProfileField>();
 
-    const searchCategories = useApiMetaProfileCategoriesSearch();
-    const searchFields = useApiMetaProfileFieldsSearch();
+    const [categories, fetchCategories] = useApiMetaProfileCategoriesFetch(i18n.language);
+    const [fields, fetchFields] = useApiMetaProfileFieldsFetch(i18n.language);
 
-    console.log(category);
+    const searchCategories = useApiMetaProfileCategoriesSearch(i18n.language);
+    const searchFields = useApiMetaProfileFieldsSearch(i18n.language);
+
+    useEffect(() => {
+        fetchCategories();
+    }, [fetchCategories]);
+
+    useEffect(() => {
+        if (category) fetchFields(category.mpcId);
+    }, [category, fetchFields]);
+
+    const onModalAddClick = useCallback(() => {
+        if (category && field) {
+            onAdd?.(category, field);
+        }
+    }, [category, field]);
 
     return (
-        <ModalContainer title={t('modal_title_add_meta_field')}>
+        <ModalContainer onBackdropClick={onClose} title={t('modal_title_add_meta_field')}>
             <Box width={'100%'}>
                 <SearchBox
                     keyIndex={'title'}
@@ -27,6 +52,7 @@ export const MCAddMetaField: FC = () => {
                     onSearch={searchCategories as any}
                     value={category}
                     onChange={(value) => setCategory(value)}
+                    defaultOptions={categories}
                 />
             </Box>
             {category && (
@@ -35,9 +61,27 @@ export const MCAddMetaField: FC = () => {
                         keyIndex={'title'}
                         valueIndex={'mpfId'}
                         onSearch={searchFields(category.mpcId) as any}
+                        defaultOptions={fields}
+                        value={field}
+                        onChange={(value) => setField(value)}
                     />
                 </Box>
             )}
+
+            <FlexBox justify={'center'} gap width={'100%'}>
+                {field && (
+                    <Button
+                        disabled={!field}
+                        icon={'check'}
+                        type={'primary'}
+                        onClick={onModalAddClick}>
+                        {t('modal_button_add')}
+                    </Button>
+                )}
+                <Button icon={'x'} onClick={onClose} type={'secondary'}>
+                    {t('modal_button_cancel')}
+                </Button>
+            </FlexBox>
         </ModalContainer>
     );
 };
