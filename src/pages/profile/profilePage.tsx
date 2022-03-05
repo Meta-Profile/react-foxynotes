@@ -9,6 +9,11 @@ import { useTranslation } from 'react-i18next';
 import { Footer } from '../../components/Footer';
 import { MCAddMetaField } from '../../components/modals';
 import { SliderPicker } from 'react-color';
+import { SearchBox } from '../../components/ui';
+import { useApiCommonSearch } from '../../hooks/useApiCommonSearch';
+import { CommonDataAPI } from '../../app/api';
+import { ActionMeta, OnChangeValue } from 'react-select';
+import { CommonData } from '../../app/api/classes/commondata';
 
 export const ProfilePage: FC = () => {
     const { t, i18n } = useTranslation();
@@ -17,6 +22,23 @@ export const ProfilePage: FC = () => {
 
     const [isEdit, setIsEdit] = useState(false);
     const [modalAddFieldVisible, setModalAddFieldVisible] = useState(false);
+
+    const [sv, ssv] = useState<{ label: string; value: string }[]>([]);
+    const commonSearch = useApiCommonSearch();
+    const onChange = (
+        newValue: OnChangeValue<{ label: string; value: string; __isNew__?: boolean }, true>,
+        actionMeta: ActionMeta<{ label: string; value: string; __isNew__?: boolean }>
+    ) => {
+        if (actionMeta.action === 'create-option') {
+            for (const i in newValue) {
+                const v = newValue[i];
+                if ((v as any).__isNew__) {
+                    delete newValue[i].__isNew__;
+                    CommonDataAPI.add({ value: newValue[i].label, mpfId: 21 });
+                }
+            }
+        }
+    };
 
     // Themefy
     const theme: any = useTheme();
@@ -82,6 +104,16 @@ export const ProfilePage: FC = () => {
                     )}
                     <MfcHeader type={profile.type} categories={profile.categories} />
                     <MFCEmpty onAddClick={() => setModalAddFieldVisible(true)} />
+                    <MFCBox title={'Тестирование хелпера'}>
+                        <SearchBox
+                            value={sv as any}
+                            isTags
+                            isCreatable
+                            onSearch={commonSearch(21) as any}
+                            // onCreate={addSearch}
+                            onChange={onChange as any}
+                        />
+                    </MFCBox>
                 </ProfilePageMainContainer>
             </ProfilePageWrapper>
             <Footer />
