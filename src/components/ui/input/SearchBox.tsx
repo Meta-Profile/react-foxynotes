@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useCallback } from 'react';
 import { SearchBoxWrapper } from './styles';
 import Select from 'react-select/async';
 import SelectCreate from 'react-select/async-creatable';
@@ -60,6 +60,16 @@ export function SearchBox<T, IsTags>(props: SearchBoxProps<T, IsTags>) {
         </span>
     );
 
+    const getOptionLabel = useCallback(
+        (value: any) => (keyIndex ? value[keyIndex] : value['label']),
+        [keyIndex]
+    );
+
+    const getOptionValue = useCallback(
+        (value: any) => (valueIndex ? value[valueIndex] : value['label']),
+        [valueIndex]
+    );
+
     if (isCreatable)
         return (
             <SearchBoxWrapper>
@@ -69,8 +79,8 @@ export function SearchBox<T, IsTags>(props: SearchBoxProps<T, IsTags>) {
                         IndicatorSeparator: null,
                         IndicatorsContainer,
                     }}
-                    getOptionLabel={keyIndex ? (p: any) => p[keyIndex] : undefined}
-                    getOptionValue={valueIndex ? (p: any) => p[valueIndex] : undefined}
+                    getOptionLabel={getOptionLabel}
+                    getOptionValue={getOptionValue}
                     classNamePrefix={'rc'}
                     placeholder={placeholder}
                     noOptionsMessage={noOptionsMessage}
@@ -92,8 +102,8 @@ export function SearchBox<T, IsTags>(props: SearchBoxProps<T, IsTags>) {
                     IndicatorSeparator: null,
                     IndicatorsContainer,
                 }}
-                getOptionLabel={keyIndex ? (p: any) => p[keyIndex] : undefined}
-                getOptionValue={valueIndex ? (p: any) => p[valueIndex] : undefined}
+                getOptionLabel={getOptionLabel}
+                getOptionValue={getOptionValue}
                 classNamePrefix={'rc'}
                 placeholder={placeholder}
                 noOptionsMessage={noOptionsMessage}

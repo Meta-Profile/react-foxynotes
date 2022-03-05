@@ -1,6 +1,6 @@
-import { FC, useEffect, useMemo, useState } from 'react';
+import { FC, useCallback, useEffect, useMemo, useState } from 'react';
 import { ProfilePageMainContainer, ProfilePageWrapper } from './styles';
-import { MFCEmpty, MfcHeader } from '../../components/metaFieldContainer';
+import { MFCBox, MFCEmpty, MfcHeader } from '../../components/metaFieldContainer';
 import { ProfileBanner } from '../../components/profileBanner';
 import { metaprofilemock } from '../../app/api/classes/metaprofile/metaprofile.test';
 import { ThemeProvider, useTheme } from 'styled-components';
@@ -8,10 +8,14 @@ import tinycolor2 from 'tinycolor2';
 import { useTranslation } from 'react-i18next';
 import { Footer } from '../../components/Footer';
 import { MCAddMetaField } from '../../components/modals';
+import { SliderPicker } from 'react-color';
 
 export const ProfilePage: FC = () => {
     const { t, i18n } = useTranslation();
     const profile = useMemo(() => (metaprofilemock as any)[i18n.language], [i18n.language]);
+    const [color, setColor] = useState(profile.settings.color);
+
+    const [isEdit, setIsEdit] = useState(false);
     const [modalAddFieldVisible, setModalAddFieldVisible] = useState(false);
 
     // Themefy
@@ -19,7 +23,7 @@ export const ProfilePage: FC = () => {
     const [newTheme, setNewTheme] = useState(theme);
 
     useEffect(() => {
-        const source = tinycolor2(profile.settings.color);
+        const source = tinycolor2(color);
         const primaryColor = source;
         let secondaryColor = source.clone().lighten(28);
         const bannerColor = source.clone().desaturate(27);
@@ -49,7 +53,11 @@ export const ProfilePage: FC = () => {
                 secondary: secondaryColor.toHexString(),
             },
         });
-    }, [theme, profile]);
+    }, [theme, color]);
+
+    const onEditButtonClick = useCallback(() => {
+        setIsEdit(!isEdit);
+    }, [isEdit]);
 
     return (
         <ThemeProvider theme={newTheme}>
@@ -59,18 +67,21 @@ export const ProfilePage: FC = () => {
                     isQrcode={true}
                     isSharable={true}
                     name={profile.title}
+                    onEditClick={onEditButtonClick}
                 />
                 <ProfilePageMainContainer>
+                    {isEdit && (
+                        <MFCBox title={t('profile_color_chose')}>
+                            <SliderPicker
+                                color={color}
+                                onChange={(v) => {
+                                    setColor(v.hex);
+                                }}
+                            />
+                        </MFCBox>
+                    )}
                     <MfcHeader type={profile.type} categories={profile.categories} />
                     <MFCEmpty onAddClick={() => setModalAddFieldVisible(true)} />
-                    {/* <MFCBox title={t('profile_color_chose')}>
-                        <SliderPicker
-                            color={color}
-                            onChange={(v) => {
-                                setColor(v.hex);
-                            }}
-                        />
-                    </MFCBox>*/}
                 </ProfilePageMainContainer>
             </ProfilePageWrapper>
             <Footer />

@@ -64,7 +64,8 @@ export const SearchBoxWrapper = styled.div`
                 transition: all 0.2s;
 
                 &.rc__option--is-focused {
-                    background-color: ${(p) => p.theme.colors.secondary30};
+                    background-color: ${(p) => p.theme.colors.secondary};
+                    opacity: 0.9;
                 }
 
                 &.rc__option--is-selected {

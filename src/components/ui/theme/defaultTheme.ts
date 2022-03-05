@@ -27,7 +27,7 @@ export const defaultTheme = {
         blue: '#2D9CDB',
         primary: '#FE6023',
         secondary: '#FFF5F1',
-        secondary30: 'rgba(255,245,241, 0.9)',
+        // secondary30: 'rgba(255,245,241, 0.9)',
     } as Record<ColorType, string>,
 
     modal: {

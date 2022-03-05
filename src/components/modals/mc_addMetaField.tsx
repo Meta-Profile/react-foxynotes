@@ -48,7 +48,7 @@ export const MCAddMetaField: FC<MCAddMetaFieldProps> = (props) => {
             <Box width={'100%'}>
                 <SearchBox
                     keyIndex={'title'}
-                    valueIndex={'mpсId'}
+                    valueIndex={'mpcId'}
                     onSearch={searchCategories as any}
                     value={category}
                     onChange={(value) => setCategory(value)}

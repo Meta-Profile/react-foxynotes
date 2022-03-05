@@ -24,11 +24,15 @@ export const MetaFieldContainerHeaderSmile = styled.div`
     align-items: center;
     padding: 0px;
 
+    text-align: center;
     position: absolute;
     width: 30px;
     height: 30px;
     left: 75px;
     top: 159px;
+
+    font-size: 20px;
+    line-height: 20px;
 
     /* White */
     background: #fefefe;
