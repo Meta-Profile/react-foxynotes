@@ -22,5 +22,6 @@
   "modal_button_add": "Add",
   "modal_button_cancel": "Cancel",
   "input_search_loading": "Loading: ",
-  "input_search_not_found": "Not found: "
+  "input_search_not_found": "Not found: ",
+  "input_search_start_typing": "Start typing for search..."
 }

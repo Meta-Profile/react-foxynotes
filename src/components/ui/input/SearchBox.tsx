@@ -46,12 +46,15 @@ export function SearchBox<T, IsTags>(props: SearchBoxProps<T, IsTags>) {
         valueIndex,
     } = props;
 
-    const noOptionsMessage = ({ inputValue }: { inputValue: string }) => (
-        <span>
-            {t('input_search_not_found')}
-            <b>&quot;{inputValue}&quot;</b>
-        </span>
-    );
+    const noOptionsMessage = ({ inputValue }: { inputValue: string }) =>
+        inputValue.trim().length < 1 ? (
+            <span>{t('input_search_start_typing')}</span>
+        ) : (
+            <span>
+                {t('input_search_not_found')}
+                <b>&quot;{inputValue}&quot;</b>
+            </span>
+        );
 
     const loadingMessage = ({ inputValue }: { inputValue: string }) => (
         <span>

@@ -22,5 +22,6 @@
   "modal_button_add": "Добавить",
   "modal_button_cancel": "Отменить",
   "input_search_loading": "Загрузка: ",
-  "input_search_not_found": "Ничего не найдено по запросу: "
+  "input_search_not_found": "Ничего не найдено по запросу: ",
+  "input_search_start_typing": "Начните писать для поиска вариантов..."
 }
