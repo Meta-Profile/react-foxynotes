@@ -1,9 +1,9 @@
 import { FC, useCallback, useState } from 'react';
 import { LoginFormWrapper } from './styles';
-import { Button } from '../../../components/ui/Button';
-import { Divider } from '../../../components/ui/Divider';
+import { Button } from '../../../components/ui';
+import { Divider } from '../../../components/ui';
 import { Text, TextFlexBox } from '../../../components/ui/Text';
-import { Input } from '../../../components/ui/Input';
+import { Input } from '../../../components/ui';
 import { toast } from 'react-toastify';
 import { useDispatch } from 'react-redux';
 import { updateForm } from '../LoginPageSlice';
@@ -24,7 +24,6 @@ export const RegisterForm: FC = (props) => {
                 username,
                 password,
                 email,
-                role: [],
             });
             toast.success(t('register_form_alert_success'));
             dispatch(updateForm('login'));
