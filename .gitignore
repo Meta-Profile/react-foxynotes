@@ -13,3 +13,4 @@
 !README.md
 !tsconfig.json
 !.gitignore
+!package-lock.json
