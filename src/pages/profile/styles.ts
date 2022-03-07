@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { FlexBoxColumn } from '../../components/ui/FlexBox';
+import { FlexBoxColumn } from '../../components/FlexBox';
 import { MainContainer } from '../../components/containers';
 
 export const ProfilePageWrapper = styled(FlexBoxColumn)`

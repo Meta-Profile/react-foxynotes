@@ -1,9 +1,9 @@
 import { FC, useCallback, useEffect } from 'react';
-import { FlexBox } from './ui/FlexBox';
+import { FlexBox } from './FlexBox';
 import styled from 'styled-components';
-import { Space } from './ui/Box';
-import { Text } from './ui/Text';
-import { Divider } from './ui/Divider';
+import { Space } from './Box';
+import { Text } from './Text';
+import { Divider } from './Divider';
 import { useTranslation } from 'react-i18next';
 import { setLocalstorageLang } from '../common/language';
 

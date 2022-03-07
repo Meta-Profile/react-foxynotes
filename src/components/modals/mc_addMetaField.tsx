@@ -1,8 +1,8 @@
 import { FC, useCallback, useEffect, useState } from 'react';
 import { ModalContainer } from './modalContainer';
 import { useTranslation } from 'react-i18next';
-import { Box, Button, FlexBox, SearchBox } from '../ui';
-import { MetaProfileCategory, MetaProfileField } from '../../app/api/classes/metaprofile/types';
+import { Box, Button, FlexBox, SearchBox } from '../index';
+import { MetaProfileCategory, MetaProfileField } from '../../api/classes/metaprofile/types';
 import {
     useApiMetaProfileCategoriesFetch,
     useApiMetaProfileCategoriesSearch,

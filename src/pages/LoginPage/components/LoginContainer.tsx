@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { FlexBox } from '../../../components/ui/FlexBox';
+import { FlexBox } from '../../../components/FlexBox';
 
 export const LoginContainer = styled(FlexBox)`
     width: 1152px;

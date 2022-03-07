@@ -1,13 +1,13 @@
 import { FC, useCallback, useState } from 'react';
 import { LoginFormWrapper } from './styles';
-import { Button } from '../../../components/ui';
-import { Divider } from '../../../components/ui';
-import { Text, TextFlexBox } from '../../../components/ui/Text';
-import { Input } from '../../../components/ui';
+import { Button } from '../../../components';
+import { Divider } from '../../../components';
+import { Text, TextFlexBox } from '../../../components/Text';
+import { Input } from '../../../components';
 import { toast } from 'react-toastify';
 import { useDispatch } from 'react-redux';
 import { updateForm } from '../LoginPageSlice';
-import { AuthAPI } from '../../../app/api';
+import { AuthAPI } from '../../../api';
 import { useTranslation } from 'react-i18next';
 
 export const RegisterForm: FC = (props) => {

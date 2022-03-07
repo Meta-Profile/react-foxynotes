@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { FlexBox } from '../../../components/ui/FlexBox';
+import { FlexBox } from '../../../components/FlexBox';
 
 export const LoginFormWrapper = styled(FlexBox)`
     width: 368px;

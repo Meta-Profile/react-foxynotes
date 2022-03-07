@@ -1,6 +1,6 @@
 import { APIRequest } from '../APIRequest';
 import { JwtResponse } from '../types';
-import { API_ENDPOINT } from '../../../config/api';
+import { API_ENDPOINT } from '../../config/api';
 import { getFingerPrint } from '../utils/fingerprint';
 
 export interface SigninProps {

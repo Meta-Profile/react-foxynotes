@@ -1,9 +1,9 @@
 import { FC } from 'react';
 import { MFCHeaderNavigatorWrapper } from './styles';
-import { FlexBox } from '../../ui/FlexBox';
-import { MetaProfileCategory } from '../../../app/api/classes/metaprofile/types';
-import { Button } from '../../ui/Button';
-import { IconType } from '../../ui/Icon';
+import { FlexBox } from '../../FlexBox';
+import { MetaProfileCategory } from '../../../api/classes/metaprofile/types';
+import { Button } from '../../Button';
+import { IconType } from '../../Icon';
 
 export interface MFCHeaderNavigatorProps {
     categories: MetaProfileCategory[];

@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import { FlexBoxColumn, FlexBoxProps } from '../ui/FlexBox';
-import { Space } from '../ui/Box';
+import { FlexBoxColumn, FlexBoxProps } from '../FlexBox';
+import { Space } from '../Box';
 
 export const MetaFieldContainer = styled(FlexBoxColumn)<FlexBoxProps>`
     padding: ${Space.default}px;

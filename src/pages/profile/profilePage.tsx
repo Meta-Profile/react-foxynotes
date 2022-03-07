@@ -2,18 +2,18 @@ import { FC, useCallback, useEffect, useMemo, useState } from 'react';
 import { ProfilePageMainContainer, ProfilePageWrapper } from './styles';
 import { MFCBox, MFCEmpty, MfcHeader } from '../../components/metaFieldContainer';
 import { ProfileBanner } from '../../components/profileBanner';
-import { metaprofilemock } from '../../app/api/classes/metaprofile/metaprofile.test';
+import { metaprofilemock } from '../../api/classes/metaprofile/metaprofile.test';
 import { ThemeProvider, useTheme } from 'styled-components';
 import tinycolor2 from 'tinycolor2';
 import { useTranslation } from 'react-i18next';
 import { Footer } from '../../components/Footer';
 import { MCAddMetaField } from '../../components/modals';
 import { SliderPicker } from 'react-color';
-import { SearchBox } from '../../components/ui';
+import { SearchBox } from '../../components';
 import { useApiCommonSearch } from '../../hooks/useApiCommonSearch';
-import { CommonDataAPI } from '../../app/api';
+import { CommonDataAPI } from '../../api';
 import { ActionMeta, OnChangeValue } from 'react-select';
-import { CommonData } from '../../app/api/classes/commondata';
+import { CommonData } from '../../api/classes/commondata';
 
 export const ProfilePage: FC = () => {
     const { t, i18n } = useTranslation();

@@ -1,5 +1,5 @@
 import { APIRequest } from '../APIRequest';
-import { API_ENDPOINT } from '../../../config/api';
+import { API_ENDPOINT } from '../../config/api';
 import { MetaProfileField } from './metaprofile/types';
 
 export interface CommonData {

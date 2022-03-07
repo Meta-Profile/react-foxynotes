@@ -1,9 +1,9 @@
 import { FC } from 'react';
-import { FlexBox } from '../../components/ui/FlexBox';
-import { Text } from '../../components/ui/Text';
-import { Divider } from '../../components/ui/Divider';
-import { dict, Icon } from '../../components/ui/Icon';
-import { Button } from '../../components/ui/Button';
+import { FlexBox } from '../../components/FlexBox';
+import { Text } from '../../components/Text';
+import { Divider } from '../../components/Divider';
+import { dict, Icon } from '../../components/Icon';
+import { Button } from '../../components/Button';
 
 export const UIPage: FC = () => {
     return (

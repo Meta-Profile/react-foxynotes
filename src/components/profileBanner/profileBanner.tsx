@@ -1,4 +1,4 @@
-import { Text } from '../ui/Text';
+import { Text } from '../Text';
 import { FC } from 'react';
 import { ProfileBannerToolboxContainer, ProfileBannerWrapper } from './profileBanner.styles';
 import { ProfileToolbox, ProfileToolboxProps } from '../profileToolbox/profileToolbox';

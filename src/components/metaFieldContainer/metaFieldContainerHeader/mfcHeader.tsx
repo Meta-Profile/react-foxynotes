@@ -1,15 +1,15 @@
 import { FC } from 'react';
 import { MetaFieldContainer } from '../metaFieldContainer.styles';
-import { FlexBox, FlexBoxCenter, FlexBoxColumn } from '../../ui/FlexBox';
-import { Text } from '../../ui/Text';
+import { FlexBox, FlexBoxCenter, FlexBoxColumn } from '../../FlexBox';
+import { Text } from '../../Text';
 import {
     MetaFieldContainerHeaderAvatar,
     MetaFieldContainerHeaderAvatarContent,
     MetaFieldContainerHeaderSmile,
 } from './styles';
 import { MFCHeaderNavigator, MFCHeaderNavigatorProps } from './mfcHeaderNavigator';
-import { MFType } from '../../../app/api/classes/metaprofile/types';
-import { Icon, IconType } from '../../ui/Icon';
+import { MFType } from '../../../api/classes/metaprofile/types';
+import { Icon, IconType } from '../../Icon';
 
 export interface MfcHeaderProps extends MFCHeaderNavigatorProps {
     type: MFType;

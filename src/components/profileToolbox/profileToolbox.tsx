@@ -1,6 +1,6 @@
 import { FC } from 'react';
 import { ProfileToolboxWrapper } from './profileToolbox.styles';
-import { Button } from '../ui/Button';
+import { Button } from '../Button';
 
 export interface ProfileToolboxProps {
     isEditable?: boolean;

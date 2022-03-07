@@ -1,7 +1,7 @@
 import { FC } from 'react';
-import { Text } from '../../ui';
+import { Text } from '../../index';
 import { MFCEmptyButtonWrapper, MFCEmptyWrapper } from './styles';
-import { Button } from '../../ui';
+import { Button } from '../../index';
 import { useTranslation } from 'react-i18next';
 
 export interface MFCEmptyProps {

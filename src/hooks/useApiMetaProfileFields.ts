@@ -1,6 +1,6 @@
-import { MetaProfileAPI } from '../app/api';
+import { MetaProfileAPI } from '../api';
 import { useCallback, useState } from 'react';
-import { MetaProfileField } from '../app/api/classes/metaprofile/types';
+import { MetaProfileField } from '../api/classes/metaprofile/types';
 
 export const useApiMetaProfileFieldsFetch = (
     lang: string

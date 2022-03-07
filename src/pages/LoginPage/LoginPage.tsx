@@ -1,7 +1,7 @@
 import { FC } from 'react';
-import { FlexBox } from '../../components/ui/FlexBox';
+import { FlexBox } from '../../components/FlexBox';
 import { LoginContainer } from './components/LoginContainer';
-import { Text } from '../../components/ui/Text';
+import { Text } from '../../components/Text';
 import { LoginForm } from './components/LoginForm';
 import { Footer } from '../../components/Footer';
 import { useSelector } from 'react-redux';

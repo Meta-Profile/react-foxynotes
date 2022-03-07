@@ -1,6 +1,6 @@
 import styled, { keyframes } from 'styled-components';
-import { FlexBoxColumn } from '../../ui/FlexBox';
-import { Space } from '../../ui/Box';
+import { FlexBoxColumn } from '../../FlexBox';
+import { Space } from '../../Box';
 
 export const ModalWrapper = styled.div`
     display: flex;

@@ -1,12 +1,12 @@
 import { FC, useCallback, useState } from 'react';
 import { LoginFormWrapper } from './styles';
-import { Button } from '../../../components/ui/Button';
-import { Divider } from '../../../components/ui/Divider';
-import { Text, TextFlexBox } from '../../../components/ui/Text';
-import { Input } from '../../../components/ui/Input';
+import { Button } from '../../../components/Button';
+import { Divider } from '../../../components/Divider';
+import { Text, TextFlexBox } from '../../../components/Text';
+import { Input } from '../../../components/Input';
 import { useDispatch } from 'react-redux';
 import { updateForm } from '../LoginPageSlice';
-import { useAuth } from '../../../app/auth/hooks/useAuth';
+import { useAuth } from '../../../auth/hooks/useAuth';
 import { useTranslation } from 'react-i18next';
 
 export const LoginForm: FC = (props) => {

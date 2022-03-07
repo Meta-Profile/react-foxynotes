@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { MetaFieldContainer } from '../metaFieldContainer.styles';
-import { FlexBox } from '../../ui/FlexBox';
-import { Text } from '../../ui/Text';
+import { FlexBox } from '../../FlexBox';
+import { Text } from '../../Text';
 
 export interface MetaFieldContainerTitleProps {
     title: string;

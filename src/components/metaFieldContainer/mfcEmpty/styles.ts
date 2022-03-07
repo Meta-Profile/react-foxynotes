@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { MetaFieldContainer } from '../metaFieldContainer.styles';
-import { Space } from '../../ui/Box';
+import { Space } from '../../Box';
 
 export const MFCEmptyWrapper = styled(MetaFieldContainer)`
     user-select: none;

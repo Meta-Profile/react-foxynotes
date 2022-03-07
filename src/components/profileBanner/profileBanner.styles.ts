@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { FlexBox } from '../ui/FlexBox';
+import { FlexBox } from '../FlexBox';
 
 export const ProfileBannerWrapper = styled(FlexBox)`
     justify-content: center;

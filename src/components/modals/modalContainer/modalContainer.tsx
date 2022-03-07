@@ -1,6 +1,6 @@
 import { FC, useCallback, useEffect } from 'react';
 import { ModalContainerWrapper, ModalWrapper } from './styles';
-import { Text } from '../../ui';
+import { Text } from '../../index';
 
 export interface ModalContainerProps {
     title?: string;

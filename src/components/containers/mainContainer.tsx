@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import { FlexBoxColumn } from '../ui/FlexBox';
-import { Space } from '../ui/Box';
+import { FlexBoxColumn } from '../FlexBox';
+import { Space } from '../Box';
 
 /**
  * Главный контейнер
