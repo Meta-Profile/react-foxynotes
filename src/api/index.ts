@@ -4,7 +4,6 @@ import { MetaProfileAPI } from './api.metaprofile';
 import { CommonDataAPI } from './api.commondata';
 
 export * from './types';
-export * from './types/uploader';
 
 /**
  * Экспорт API библиотеки
