@@ -26,7 +26,7 @@ export const LoginPage: FC<LoginPageProps> = (props) => {
     }, [user]);
 
     return (
-        <FlexBox column align={'center'} minHeight={'100vh'}>
+        <FlexBox backgroundColor={'white'} column align={'center'} minHeight={'100vh'}>
             <LoginContainer padding>
                 <FlexBox column justify={'center'} gap>
                     <Text type={'title'}>{t('login_title')}</Text>
