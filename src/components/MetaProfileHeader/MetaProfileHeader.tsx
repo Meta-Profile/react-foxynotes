@@ -33,7 +33,12 @@ export const MetaProfileHeader: FC<MetaProfileHeaderProps> = (props) => {
         <MetaProfileHeaderWrapper>
             <MetaProfileHeaderContainer>
                 <MetaProfileHeaderUpperLine>
-                    <FlexBoxColumn align={'flex-start'} color={'white'} opacity={0.7} gap={2}>
+                    <FlexBoxColumn
+                        flex={1}
+                        align={'flex-start'}
+                        color={'white'}
+                        opacity={0.7}
+                        gap={2}>
                         <FlexBox align={'center'} gap={Space.xsmall}>
                             <Icon type={'meta'} />
                             <Text type={'small'} style={{ fontWeight: 600 }}>
@@ -43,7 +48,7 @@ export const MetaProfileHeader: FC<MetaProfileHeaderProps> = (props) => {
                         <Text type={'nano'}>Последнее изменение: 24.02.2022 в 14:40</Text>
                     </FlexBoxColumn>
                     <MetaProfileHeaderTitle>{title}</MetaProfileHeaderTitle>
-                    <FlexBox gap={Space.small}>
+                    <FlexBox gap={Space.small} justify={'flex-end'} flex={1}>
                         <Button type={'secondary'} icon={'share'} />
                         <Button type={'secondary'} icon={'qr'} />
                         <Button type={'secondary'} icon={'edit'} onClick={onEditClick} />

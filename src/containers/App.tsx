@@ -7,6 +7,7 @@ import { ThemeProvider } from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAuth } from '../selectors';
 import { authenticate } from '../slices/auth';
+import { NavBar } from '../components/NavBar';
 
 export const App: FC = () => {
     // ===========================================================================

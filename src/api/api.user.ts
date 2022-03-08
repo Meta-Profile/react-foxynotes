@@ -2,7 +2,7 @@
  * API пользователей
  */
 import { Request } from './request';
-import { ConfigApi } from '../config/api';
+import { ApiConfig } from '../config/api';
 
 export interface UserDetails {
     userId: number;
@@ -17,7 +17,7 @@ export class UserAPI {
      * Получает текущего пользователя
      */
     public static me() {
-        return new Request(ConfigApi.endpoint + '/user/me')
+        return new Request(ApiConfig.endpoint + '/user/me')
             .get()
             .authorize()
             .release<UserDetails>();

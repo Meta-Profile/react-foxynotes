@@ -8,23 +8,36 @@ import { useTranslation } from 'react-i18next';
 import { Footer } from '../../components/Footer';
 import { MCAddMetaField } from '../../components/modals';
 import { SliderPicker } from 'react-color';
-import { SearchBox } from '../../components';
 import { useApiCommonSearch } from '../../hooks/useApiCommonSearch';
 import { CommonDataAPI, MetaProfile, MetaProfileAPI } from '../../api';
 import { ActionMeta, OnChangeValue } from 'react-select';
-import { NavBar } from '../../components/NavBar';
 import { MetaProfileHeader } from '../../components/MetaProfileHeader';
-import { useDebounce, useDebouncedCallback } from 'use-debounce';
+import { useDebouncedCallback } from 'use-debounce';
+import { useParams } from 'react-router-dom';
 
 export const ProfilePage: FC = () => {
     const { t, i18n } = useTranslation();
+    const { mpId, mpcId } = useParams<{ mpId: string; mpcId?: string }>();
+
     const profile = useMemo(() => (metaprofilemock as any)[i18n.language], [i18n.language]);
     const [color, setColor] = useState('#000');
     const [prof, setProfile] = useState<MetaProfile>();
     const [activeCategory, setActiveCategory] = useState<number>(1);
 
+    /**
+     * Основной useEffect, который влияет на отображение мета-профиля
+     */
+    useEffect(() => {
+        if (mpId) {
+            MetaProfileAPI.get(mpId).then((value) => {
+                setProfile(value.response);
+                setColor(value.response.color);
+            });
+        }
+    }, [mpId]);
+
     const update = useDebouncedCallback(() => {
-        MetaProfileAPI.update(1, { color });
+        MetaProfileAPI.update(mpId, { color });
     }, 1000);
 
     const [isEdit, setIsEdit] = useState(false);
@@ -34,31 +47,6 @@ export const ProfilePage: FC = () => {
         () => prof?.composition.map((v) => v.category).sort((a, b) => a.mpcId - b.mpcId) ?? [],
         [prof]
     );
-
-    const [sv, ssv] = useState<{ label: string; value: string }[]>([]);
-    const commonSearch = useApiCommonSearch();
-
-    useEffect(() => {
-        MetaProfileAPI.get(1).then((value) => {
-            setProfile(value.response);
-            setColor(value.response.color);
-        });
-    }, []);
-
-    const onChange = (
-        newValue: OnChangeValue<{ label: string; value: string; __isNew__?: boolean }, true>,
-        actionMeta: ActionMeta<{ label: string; value: string; __isNew__?: boolean }>
-    ) => {
-        if (actionMeta.action === 'create-option') {
-            for (const i in newValue) {
-                const v = newValue[i];
-                if ((v as any).__isNew__) {
-                    delete newValue[i].__isNew__;
-                    CommonDataAPI.add({ value: newValue[i].label, mpfId: 21 });
-                }
-            }
-        }
-    };
 
     // Themefy
     const theme: any = useTheme();
@@ -105,7 +93,6 @@ export const ProfilePage: FC = () => {
     return (
         <ThemeProvider theme={newTheme}>
             <ProfilePageWrapper>
-                <NavBar />
                 <MetaProfileHeader
                     title={prof.title}
                     categories={categories}

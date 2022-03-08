@@ -34,6 +34,7 @@ export const MetaProfileHeaderTitle = styled.div`
     font-size: 60px;
     line-height: 64px;
     margin-top: -11px;
+    justify-content: center;
     /* or 107% */
 
     display: flex;

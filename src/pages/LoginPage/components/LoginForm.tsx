@@ -7,7 +7,7 @@ import { Input } from '../../../components';
 import { useAuth } from '../../../auth/hooks/useAuth';
 import { useTranslation } from 'react-i18next';
 import { useHistory } from 'react-router-dom';
-import { ConfigRoutes } from '../../../config/routes';
+import { RoutesConfig } from '../../../config/routes';
 
 export const LoginForm: FC = (props) => {
     const { t } = useTranslation();
@@ -23,7 +23,7 @@ export const LoginForm: FC = (props) => {
     }, [username, password, login]);
 
     const onSwitchFormClick = useCallback(() => {
-        history.push(ConfigRoutes.paths.signUp);
+        history.push(RoutesConfig.paths.signUp);
     }, [history]);
 
     return (

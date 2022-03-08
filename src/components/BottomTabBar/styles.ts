@@ -1,11 +1,25 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 export const BottomTaBarButtonsWrapper = styled.div`
     display: flex;
     width: 100%;
-    justify-content: space-between;
+    justify-content: flex-end;
+    gap: 16px;
     align-items: center;
     color: ${(p) => p.theme.colors.black40};
+`;
+
+export const ButtonTabBarButton = styled.div<{ active?: boolean }>`
+    cursor: pointer;
+    transition: all 0.2s;
+    ${(p) =>
+        p.active &&
+        css`
+            color: ${(p) => p.theme.colors.primary} !important;
+        `};
+    &:hover {
+        color: ${(p) => p.theme.colors.black20};
+    }
 `;
 
 export const BottomTabBarAvatar = styled.div<{ url?: string }>`
