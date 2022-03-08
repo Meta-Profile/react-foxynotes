@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 export const Input = styled.input`
+    font-family: Montserrat, sans-serif;
     height: 48px;
     background-color: ${(p) => p.theme.colors.black5};
     border: 1px solid ${(p) => p.theme.colors.black5};

@@ -1,17 +1,29 @@
-import { FC } from 'react';
-import { FlexBox } from '../../components/FlexBox';
+import { FC, useEffect, useState } from 'react';
+import { FlexBox } from '../../components';
 import { LoginContainer } from './components/LoginContainer';
-import { Text } from '../../components/Text';
+import { Text } from '../../components';
 import { LoginForm } from './components/LoginForm';
 import { Footer } from '../../components/Footer';
-import { useSelector } from 'react-redux';
-import { LoginPageSelector } from './selectors';
 import { RegisterForm } from './components/RegisterForm';
 import { useTranslation } from 'react-i18next';
+import { useSelector } from 'react-redux';
+import { getAuth } from '../../selectors';
+import { useHistory } from 'react-router-dom';
+import { ConfigRoutes } from '../../config/routes';
 
-export const LoginPage: FC = () => {
-    const { form } = useSelector(LoginPageSelector);
+export interface LoginPageProps {
+    signup?: boolean;
+}
+
+export const LoginPage: FC<LoginPageProps> = (props) => {
+    const { user } = useSelector(getAuth);
+    const history = useHistory();
+    const { signup } = props;
     const { t } = useTranslation();
+
+    useEffect(() => {
+        if (user) history.push(ConfigRoutes.paths.home);
+    }, [user]);
 
     return (
         <FlexBox column align={'center'} minHeight={'100vh'}>
@@ -20,7 +32,7 @@ export const LoginPage: FC = () => {
                     <Text type={'title'}>{t('login_title')}</Text>
                     <Text type={'normal'}>{t('login_text')}</Text>
                 </FlexBox>
-                {form === 'login' ? <LoginForm /> : <RegisterForm />}
+                {signup ? <RegisterForm /> : <LoginForm />}
             </LoginContainer>
             <Footer />
         </FlexBox>

@@ -43,7 +43,7 @@ export const Reset = createGlobalStyle`
     text-rendering: optimizeSpeed;
     -moz-osx-font-smoothing: grayscale;
     -webkit-font-smoothing: antialiased;
-
+    font-family: Montserrat, sans-serif;
     
   }
 

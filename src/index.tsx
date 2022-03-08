@@ -1,24 +1,15 @@
 import React from 'react';
 import { render } from 'react-dom';
 import reportWebVitals from './reportWebVitals';
-import { Router } from './router/routes';
 import { store } from './store';
 import { Provider } from 'react-redux';
-import { Reset } from './components';
-import { ThemeProvider } from 'styled-components';
-import { Themes } from './theme';
-import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-
+import { App } from './containers/App';
 import './i18n';
 
 render(
     <Provider store={store}>
-        <ThemeProvider theme={Themes.default}>
-            <Reset />
-            <ToastContainer />
-            <Router />
-        </ThemeProvider>
+        <App />
     </Provider>,
     document.getElementById('root')
 );

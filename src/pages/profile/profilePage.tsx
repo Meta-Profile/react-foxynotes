@@ -14,6 +14,7 @@ import { useApiCommonSearch } from '../../hooks/useApiCommonSearch';
 import { CommonDataAPI } from '../../api';
 import { ActionMeta, OnChangeValue } from 'react-select';
 import { ApiCommondata } from '../../api/api.commondata';
+import { NavBar } from '../../components/NavBar';
 
 export const ProfilePage: FC = () => {
     const { t, i18n } = useTranslation();
@@ -84,6 +85,7 @@ export const ProfilePage: FC = () => {
     return (
         <ThemeProvider theme={newTheme}>
             <ProfilePageWrapper>
+                <NavBar />
                 <ProfileBanner
                     isEditable={true}
                     isQrcode={true}

@@ -5,14 +5,14 @@ import { Divider } from '../../../components';
 import { Text, TextFlexBox } from '../../../components/Text';
 import { Input } from '../../../components';
 import { toast } from 'react-toastify';
-import { useDispatch } from 'react-redux';
-import { updateForm } from '../LoginPageSlice';
 import { AuthAPI } from '../../../api';
 import { useTranslation } from 'react-i18next';
+import { useHistory } from 'react-router-dom';
+import { ConfigRoutes } from '../../../config/routes';
 
-export const RegisterForm: FC = (props) => {
-    const dispatch = useDispatch();
+export const RegisterForm: FC = () => {
     const { t } = useTranslation();
+    const history = useHistory();
 
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
@@ -26,15 +26,15 @@ export const RegisterForm: FC = (props) => {
                 email,
             });
             toast.success(t('register_form_alert_success'));
-            dispatch(updateForm('login'));
+            history.push(ConfigRoutes.paths.signIn);
         } catch (e: any) {
             toast.error(e.error);
         }
-    }, [username, password, email, dispatch]);
+    }, [username, password, email, history]);
 
     const onSwitchFormClick = useCallback(() => {
-        dispatch(updateForm('login'));
-    }, [dispatch]);
+        history.push(ConfigRoutes.paths.signIn);
+    }, [history]);
 
     return (
         <LoginFormWrapper column gap padding backgroundColor={'black3'}>
