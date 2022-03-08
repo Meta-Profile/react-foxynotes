@@ -8,8 +8,8 @@ import {
     MetaFieldContainerHeaderSmile,
 } from './styles';
 import { MFCHeaderNavigator, MFCHeaderNavigatorProps } from './mfcHeaderNavigator';
-import { MFType } from '../../../api/classes/metaprofile/types';
 import { Icon, IconType } from '../../Icon';
+import { MFType } from '../../../api';
 
 export interface MfcHeaderProps extends MFCHeaderNavigatorProps {
     type: MFType;

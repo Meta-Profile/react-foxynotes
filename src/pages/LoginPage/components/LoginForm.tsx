@@ -1,17 +1,17 @@
 import { FC, useCallback, useState } from 'react';
 import { LoginFormWrapper } from './styles';
-import { Button } from '../../../components/Button';
-import { Divider } from '../../../components/Divider';
+import { Button } from '../../../components';
+import { Divider } from '../../../components';
 import { Text, TextFlexBox } from '../../../components/Text';
-import { Input } from '../../../components/Input';
-import { useDispatch } from 'react-redux';
-import { updateForm } from '../LoginPageSlice';
+import { Input } from '../../../components';
 import { useAuth } from '../../../auth/hooks/useAuth';
 import { useTranslation } from 'react-i18next';
+import { useHistory } from 'react-router-dom';
+import { ConfigRoutes } from '../../../config/routes';
 
 export const LoginForm: FC = (props) => {
-    const dispatch = useDispatch();
     const { t } = useTranslation();
+    const history = useHistory();
 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
@@ -23,8 +23,8 @@ export const LoginForm: FC = (props) => {
     }, [username, password, login]);
 
     const onSwitchFormClick = useCallback(() => {
-        dispatch(updateForm('register'));
-    }, [dispatch]);
+        history.push(ConfigRoutes.paths.signUp);
+    }, [history]);
 
     return (
         <LoginFormWrapper column gap padding backgroundColor={'black3'}>

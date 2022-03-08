@@ -1,11 +1,9 @@
 import { API } from './api';
-import { APIClassAuth } from './methods/auth';
-import { MetaProfileAPI } from './classes/metaprofile/metaprofile';
-import { CommonDataAPI } from './classes/commondata';
+import { APIClassAuth } from './api.auth';
+import { MetaProfileAPI } from './api.metaprofile';
+import { CommonDataAPI } from './api.commondata';
 
 export * from './types';
-export * from './types/uploader';
-export * from './types/users';
 
 /**
  * Экспорт API библиотеки

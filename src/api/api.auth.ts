@@ -1,7 +1,7 @@
-import { APIRequest } from '../APIRequest';
-import { JwtResponse } from '../types';
-import { API_ENDPOINT } from '../../config/api';
-import { getFingerPrint } from '../utils/fingerprint';
+import { Request } from './request';
+import { JwtResponse } from './types';
+import { ConfigApi } from '../config/api';
+import { getFingerPrint } from './utils/fingerprint';
 
 export interface SigninProps {
     username: string;
@@ -16,7 +16,7 @@ export interface SignupProps extends SigninProps {
  * API класс авторизации
  */
 export class APIClassAuth {
-    protected url = API_ENDPOINT + '/auth';
+    protected url = ConfigApi.endpoint + '/auth';
 
     /**
      * Выполняет авторизацию
@@ -24,7 +24,7 @@ export class APIClassAuth {
      */
     async signin(props: SigninProps) {
         const fip = await getFingerPrint();
-        return new APIRequest(this.url + '/signin')
+        return new Request(this.url + '/signin')
             .post()
             .header('fp', fip)
             .body(props)
@@ -37,6 +37,6 @@ export class APIClassAuth {
      */
     async signup(props: SignupProps) {
         const fip = await getFingerPrint();
-        return new APIRequest(this.url + '/signup').post().body(props).header('fp', fip).release();
+        return new Request(this.url + '/signup').post().body(props).header('fp', fip).release();
     }
 }

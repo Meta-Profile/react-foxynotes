@@ -1,7 +1,6 @@
-import { MetaProfileAPI } from '../api';
+import { MetaProfileAPI, MetaProfileCategory } from '../api';
 import { useTranslation } from 'react-i18next';
 import { useCallback, useEffect, useState } from 'react';
-import { MetaProfileCategory } from '../api/classes/metaprofile/types';
 
 export const useApiMetaProfileCategories = () => {
     const { i18n } = useTranslation();

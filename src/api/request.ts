@@ -6,7 +6,7 @@ export enum APIRequestMethod {
     GET = 'GET',
 }
 
-export class APIRequest {
+export class Request {
     private readonly requestUrl: string;
     private requestLang = 'en';
     private requestMethod: APIRequestMethod = APIRequestMethod.GET;
@@ -33,7 +33,7 @@ export class APIRequest {
      * Язык запроса
      * @param l
      */
-    public lang(l: string): APIRequest {
+    public lang(l: string): Request {
         this.requestLang = l;
         return this;
     }
@@ -42,7 +42,7 @@ export class APIRequest {
      * Устанавливает метод запроса
      * @param m
      */
-    public method(m: APIRequestMethod): APIRequest {
+    public method(m: APIRequestMethod): Request {
         this.requestMethod = m;
         return this;
     }
@@ -50,14 +50,14 @@ export class APIRequest {
     /**
      * Устанавливает метод запроса как POST
      */
-    public post(): APIRequest {
+    public post(): Request {
         return this.method(APIRequestMethod.POST);
     }
 
     /**
      * Устанавливает метод запроса как GET
      */
-    public get(): APIRequest {
+    public get(): Request {
         return this.method(APIRequestMethod.GET);
     }
 
@@ -66,7 +66,7 @@ export class APIRequest {
      * @param key
      * @param value
      */
-    public query<T>(key: string, value: T | T[]): APIRequest {
+    public query<T>(key: string, value: T | T[]): Request {
         if (value === undefined) return this;
         if (value instanceof Array && value.length > 0) {
             for (const v of value) this.requestQuery.push({ key, value: String(v) });
@@ -80,7 +80,7 @@ export class APIRequest {
      * Добавляет body параметр
      * @param b
      */
-    public body<T>(b: T): APIRequest {
+    public body<T>(b: T): Request {
         this.requestBody = b;
         return this;
     }
@@ -90,7 +90,7 @@ export class APIRequest {
      * @param key
      * @param value
      */
-    public header(key: string, value: string | null | undefined): APIRequest {
+    public header(key: string, value: string | null | undefined): Request {
         if (!value) {
             this.requestHeaders.delete(key);
             return this;
@@ -101,10 +101,10 @@ export class APIRequest {
 
     /**
      * Устанавливает заголовок.
-     * @deprecated используйте крайне осторожно, используйте APIRequest.header метод
+     * @deprecated используйте крайне осторожно, используйте Request.header метод
      * @param h
      */
-    public setHeaders(h: Record<string, string>): APIRequest {
+    public setHeaders(h: Record<string, string>): Request {
         this.requestHeaders = new Headers(h);
         return this;
     }
@@ -113,8 +113,17 @@ export class APIRequest {
      * Подключает токен авторизации JWT
      * @param token
      */
-    public bearer(token: string): APIRequest {
+    public bearer(token: string): Request {
         this.header('Authorization', 'Bearer ' + token);
+        return this;
+    }
+
+    /**
+     * Возвращает метод авторизации
+     */
+    public authorize(): Request {
+        const token = localStorage.getItem('token');
+        if (token) this.bearer(token);
         return this;
     }
 

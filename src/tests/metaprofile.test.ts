@@ -1,4 +1,4 @@
-import { MetaProfileCategory, MFType } from './types';
+import { MetaProfileCategory, MFType } from '../api';
 
 export const metaprofilemockRu = {
     title: 'Екатерина Крамер',
