@@ -7,13 +7,14 @@ export const NavBarHolder = styled.div`
 `;
 
 export const NavBarWrapper = styled.div`
-    position: absolute;
+    position: fixed;
     background-color: ${(p) => p.theme.colors.black100};
     display: flex;
     height: 64px;
     width: 100%;
     align-items: center;
     justify-content: center;
+    z-index: 100000;
 `;
 
 export const NavBarContainer = styled.div`

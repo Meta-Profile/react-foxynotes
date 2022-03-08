@@ -3,7 +3,7 @@
  */
 const ConfigApi = {
     version: 'v1',
-    localhost: false,
+    localhost: true,
     endpoint: 'https://api.foxynotes.ru/',
 };
 
