@@ -17,6 +17,7 @@ import {
     faGlobe,
     faWarehouse,
     faBell,
+    faTrash,
 } from '@fortawesome/free-solid-svg-icons';
 
 export const dict: Record<string, IconDefinition> = {
@@ -32,6 +33,7 @@ export const dict: Record<string, IconDefinition> = {
     public: faGlobe,
     warehouse: faWarehouse,
     feed: faBell,
+    trash: faTrash,
 };
 
 export type IconType =

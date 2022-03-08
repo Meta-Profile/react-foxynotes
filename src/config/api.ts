@@ -1,14 +1,14 @@
 /**
  * Настройки API
  */
-const ConfigApi = {
+const ApiConfig = {
     version: 'v1',
     localhost: false,
     endpoint: 'https://api.foxynotes.ru/',
 };
 
 // Автоматические настройки
-if (ConfigApi.localhost) ConfigApi.endpoint = 'http://localhost:8080/';
-ConfigApi.endpoint = ConfigApi.endpoint + ConfigApi.version;
+if (ApiConfig.localhost) ApiConfig.endpoint = 'http://localhost:8080/';
+ApiConfig.endpoint = ApiConfig.endpoint + ApiConfig.version;
 
-export { ConfigApi };
+export { ApiConfig };

@@ -1,13 +1,22 @@
 import { FC } from 'react';
 import { Icon } from '../Icon';
-import { BottomTaBarButtonsWrapper, BottomTabBarAvatar } from './styles';
+import { BottomTaBarButtonsWrapper, BottomTabBarAvatar, ButtonTabBarButton } from './styles';
+import { useHistory, useLocation } from 'react-router-dom';
+import { RoutesConfig } from '../../config/routes';
 
 export const BottomTaBarButtons: FC = () => {
+    const history = useHistory();
+    const { pathname } = useLocation();
+
     return (
         <BottomTaBarButtonsWrapper>
             <Icon type={'feed'} size={'m'} />
             <Icon type={'add'} size={'m'} />
-            <Icon type={'meta'} size={'m'} />
+            <ButtonTabBarButton
+                active={pathname === RoutesConfig.paths.home}
+                onClick={() => history.push(RoutesConfig.paths.home)}>
+                <Icon type={'meta'} size={'m'} />
+            </ButtonTabBarButton>
             <Icon type={'search'} size={'m'} />
             <BottomTabBarAvatar
                 url={

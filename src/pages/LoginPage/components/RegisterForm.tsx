@@ -8,7 +8,7 @@ import { toast } from 'react-toastify';
 import { AuthAPI } from '../../../api';
 import { useTranslation } from 'react-i18next';
 import { useHistory } from 'react-router-dom';
-import { ConfigRoutes } from '../../../config/routes';
+import { RoutesConfig } from '../../../config/routes';
 
 export const RegisterForm: FC = () => {
     const { t } = useTranslation();
@@ -26,14 +26,14 @@ export const RegisterForm: FC = () => {
                 email,
             });
             toast.success(t('register_form_alert_success'));
-            history.push(ConfigRoutes.paths.signIn);
+            history.push(RoutesConfig.paths.signIn);
         } catch (e: any) {
             toast.error(e.error);
         }
     }, [username, password, email, history]);
 
     const onSwitchFormClick = useCallback(() => {
-        history.push(ConfigRoutes.paths.signIn);
+        history.push(RoutesConfig.paths.signIn);
     }, [history]);
 
     return (

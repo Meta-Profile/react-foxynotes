@@ -37,8 +37,12 @@ export const Reset = createGlobalStyle`
     margin: 0;
   }
 
+  html{
+    background-color: #151514;
+  }
   /* Выставляем основные настройки по-умолчанию для body */
   body {
+    background-color: #151514;
     scroll-behavior: smooth;
     text-rendering: optimizeSpeed;
     -moz-osx-font-smoothing: grayscale;

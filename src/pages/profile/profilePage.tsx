@@ -1,7 +1,6 @@
 import { FC, useCallback, useEffect, useMemo, useState } from 'react';
 import { ProfilePageMainContainer, ProfilePageWrapper } from './styles';
-import { MFCBox, MFCEmpty, MfcHeader } from '../../components/metaFieldContainer';
-import { ProfileBanner } from '../../components/profileBanner';
+import { MFCBox, MFCEmpty } from '../../components/metaFieldContainer';
 import { metaprofilemock } from '../../tests/metaprofile.test';
 import { ThemeProvider, useTheme } from 'styled-components';
 import tinycolor2 from 'tinycolor2';
@@ -9,37 +8,42 @@ import { useTranslation } from 'react-i18next';
 import { Footer } from '../../components/Footer';
 import { MCAddMetaField } from '../../components/modals';
 import { SliderPicker } from 'react-color';
-import { SearchBox } from '../../components';
-import { useApiCommonSearch } from '../../hooks/useApiCommonSearch';
-import { CommonDataAPI } from '../../api';
-import { ActionMeta, OnChangeValue } from 'react-select';
-import { ApiCommondata } from '../../api/api.commondata';
-import { NavBar } from '../../components/NavBar';
+import { CommonDataAPI, MetaProfile, MetaProfileAPI } from '../../api';
+import { MetaProfileHeader } from '../../components/MetaProfileHeader';
+import { useDebouncedCallback } from 'use-debounce';
+import { useParams } from 'react-router-dom';
 
 export const ProfilePage: FC = () => {
     const { t, i18n } = useTranslation();
-    const profile = useMemo(() => (metaprofilemock as any)[i18n.language], [i18n.language]);
-    const [color, setColor] = useState(profile.settings.color);
+    const { mpId, mpcId } = useParams<{ mpId: string; mpcId?: string }>();
+
+    const [color, setColor] = useState('#000');
+    const [profile, setProfile] = useState<MetaProfile>();
+    const [activeCategory, setActiveCategory] = useState<number>(1);
+
+    /**
+     * Основной useEffect, который влияет на отображение мета-профиля
+     */
+    useEffect(() => {
+        if (mpId) {
+            MetaProfileAPI.get(mpId).then((value) => {
+                setProfile(value.response);
+                setColor(value.response.color);
+            });
+        }
+    }, [mpId]);
+
+    const update = useDebouncedCallback(() => {
+        MetaProfileAPI.update(mpId, { color });
+    }, 1000);
 
     const [isEdit, setIsEdit] = useState(false);
     const [modalAddFieldVisible, setModalAddFieldVisible] = useState(false);
 
-    const [sv, ssv] = useState<{ label: string; value: string }[]>([]);
-    const commonSearch = useApiCommonSearch();
-    const onChange = (
-        newValue: OnChangeValue<{ label: string; value: string; __isNew__?: boolean }, true>,
-        actionMeta: ActionMeta<{ label: string; value: string; __isNew__?: boolean }>
-    ) => {
-        if (actionMeta.action === 'create-option') {
-            for (const i in newValue) {
-                const v = newValue[i];
-                if ((v as any).__isNew__) {
-                    delete newValue[i].__isNew__;
-                    CommonDataAPI.add({ value: newValue[i].label, mpfId: 21 });
-                }
-            }
-        }
-    };
+    const categories = useMemo(
+        () => profile?.composition.map((v) => v.category).sort((a, b) => a.mpcId - b.mpcId) ?? [],
+        [profile]
+    );
 
     // Themefy
     const theme: any = useTheme();
@@ -64,12 +68,11 @@ export const ProfilePage: FC = () => {
                 if (i >= 100) break;
             }
         }
-        document
-            .querySelectorAll('meta[name="theme-color"]')
-            .forEach((value) => value.setAttribute('content', bannerColor.toHexString()));
-
         setNewTheme({
-            banner: bannerColor.toHexString(),
+            banner: `linear-gradient(180deg, ${bannerColor.toHexString()} 0%, ${bannerColor
+                .clone()
+                .darken(5)
+                .toHexString()} 100%)`,
             colors: {
                 ...theme.colors,
                 primary: primaryColor.toHexString(),
@@ -82,16 +85,17 @@ export const ProfilePage: FC = () => {
         setIsEdit(!isEdit);
     }, [isEdit]);
 
+    if (!profile) return <div>Loading...</div>;
+
     return (
         <ThemeProvider theme={newTheme}>
             <ProfilePageWrapper>
-                <NavBar />
-                <ProfileBanner
-                    isEditable={true}
-                    isQrcode={true}
-                    isSharable={true}
-                    name={profile.title}
+                <MetaProfileHeader
+                    title={profile.title}
+                    categories={categories}
                     onEditClick={onEditButtonClick}
+                    onCategorySelect={(category) => setActiveCategory(category.mpcId)}
+                    activeCategoryId={activeCategory}
                 />
                 <ProfilePageMainContainer>
                     {isEdit && (
@@ -100,22 +104,26 @@ export const ProfilePage: FC = () => {
                                 color={color}
                                 onChange={(v) => {
                                     setColor(v.hex);
+                                    update();
                                 }}
                             />
                         </MFCBox>
                     )}
-                    <MfcHeader type={profile.type} categories={profile.categories} />
-                    <MFCEmpty onAddClick={() => setModalAddFieldVisible(true)} />
-                    <MFCBox title={'Тестирование хелпера'}>
-                        <SearchBox
-                            value={sv as any}
-                            isTags
-                            isCreatable
-                            onSearch={commonSearch(21) as any}
-                            // onCreate={addSearch}
-                            onChange={onChange as any}
-                        />
-                    </MFCBox>
+                    {profile.composition.length < 1 && (
+                        <MFCEmpty onAddClick={() => setModalAddFieldVisible(true)} />
+                    )}
+                    {profile.composition.map((category) => {
+                        if (category.category.mpcId === activeCategory) {
+                            return category.fields.map((field) => (
+                                <MFCBox
+                                    isEditMode={isEdit}
+                                    key={field.mpdId}
+                                    title={field.field.title}>
+                                    {JSON.stringify(field.data)}
+                                </MFCBox>
+                            ));
+                        }
+                    })}
                 </ProfilePageMainContainer>
             </ProfilePageWrapper>
             <Footer />

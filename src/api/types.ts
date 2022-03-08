@@ -47,8 +47,31 @@ export interface MetaProfileField {
     title: string;
 }
 
+export interface MetaProfileFieldData {
+    data: any;
+    mpdId: number;
+    field: MetaProfileField;
+}
+
 export interface MFType {
     mftId: number;
     title: string;
     icon: string;
+}
+
+export interface MetaProfileUpdatable {
+    title: string;
+    color: string;
+}
+
+export interface MetaProfileComposition {
+    category: MetaProfileCategory;
+    fields: MetaProfileFieldData[];
+}
+
+export interface MetaProfile extends MetaProfileUpdatable {
+    mpId: number;
+    authorId: number;
+    type: any;
+    composition: MetaProfileComposition[];
 }

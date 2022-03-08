@@ -3,6 +3,7 @@ import { ColorType } from '../theme/types';
 import { defaultTheme } from '../theme/defaultTheme';
 
 export enum Space {
+    xsmall = 4,
     small = 8,
     default = 16,
     large = 32,

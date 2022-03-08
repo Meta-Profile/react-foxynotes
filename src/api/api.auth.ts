@@ -1,6 +1,6 @@
 import { Request } from './request';
 import { JwtResponse } from './types';
-import { ConfigApi } from '../config/api';
+import { ApiConfig } from '../config/api';
 import { getFingerPrint } from './utils/fingerprint';
 
 export interface SigninProps {
@@ -16,7 +16,7 @@ export interface SignupProps extends SigninProps {
  * API класс авторизации
  */
 export class APIClassAuth {
-    protected url = ConfigApi.endpoint + '/auth';
+    protected url = ApiConfig.endpoint + '/auth';
 
     /**
      * Выполняет авторизацию

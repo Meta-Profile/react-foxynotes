@@ -30,6 +30,8 @@ export const defaultTheme = {
         // secondary30: 'rgba(255,245,241, 0.9)',
     } as Record<ColorType, string>,
 
+    banner: 'linear-gradient(180deg, #e65b42 0%, #e95053 100%)',
+
     modal: {
         backgroundColor: white,
         color: blackAbsolute,
