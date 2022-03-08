@@ -8,9 +8,7 @@ import { useTranslation } from 'react-i18next';
 import { Footer } from '../../components/Footer';
 import { MCAddMetaField } from '../../components/modals';
 import { SliderPicker } from 'react-color';
-import { useApiCommonSearch } from '../../hooks/useApiCommonSearch';
 import { CommonDataAPI, MetaProfile, MetaProfileAPI } from '../../api';
-import { ActionMeta, OnChangeValue } from 'react-select';
 import { MetaProfileHeader } from '../../components/MetaProfileHeader';
 import { useDebouncedCallback } from 'use-debounce';
 import { useParams } from 'react-router-dom';
@@ -19,9 +17,8 @@ export const ProfilePage: FC = () => {
     const { t, i18n } = useTranslation();
     const { mpId, mpcId } = useParams<{ mpId: string; mpcId?: string }>();
 
-    const profile = useMemo(() => (metaprofilemock as any)[i18n.language], [i18n.language]);
     const [color, setColor] = useState('#000');
-    const [prof, setProfile] = useState<MetaProfile>();
+    const [profile, setProfile] = useState<MetaProfile>();
     const [activeCategory, setActiveCategory] = useState<number>(1);
 
     /**
@@ -44,8 +41,8 @@ export const ProfilePage: FC = () => {
     const [modalAddFieldVisible, setModalAddFieldVisible] = useState(false);
 
     const categories = useMemo(
-        () => prof?.composition.map((v) => v.category).sort((a, b) => a.mpcId - b.mpcId) ?? [],
-        [prof]
+        () => profile?.composition.map((v) => v.category).sort((a, b) => a.mpcId - b.mpcId) ?? [],
+        [profile]
     );
 
     // Themefy
@@ -88,13 +85,13 @@ export const ProfilePage: FC = () => {
         setIsEdit(!isEdit);
     }, [isEdit]);
 
-    if (!prof) return <div>Loading...</div>;
+    if (!profile) return <div>Loading...</div>;
 
     return (
         <ThemeProvider theme={newTheme}>
             <ProfilePageWrapper>
                 <MetaProfileHeader
-                    title={prof.title}
+                    title={profile.title}
                     categories={categories}
                     onEditClick={onEditButtonClick}
                     onCategorySelect={(category) => setActiveCategory(category.mpcId)}
@@ -112,8 +109,10 @@ export const ProfilePage: FC = () => {
                             />
                         </MFCBox>
                     )}
-                    <MFCEmpty onAddClick={() => setModalAddFieldVisible(true)} />
-                    {prof.composition.map((category) => {
+                    {profile.composition.length < 1 && (
+                        <MFCEmpty onAddClick={() => setModalAddFieldVisible(true)} />
+                    )}
+                    {profile.composition.map((category) => {
                         if (category.category.mpcId === activeCategory) {
                             return category.fields.map((field) => (
                                 <MFCBox key={field.mpdId} title={field.field.title}>
