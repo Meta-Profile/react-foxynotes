@@ -13,6 +13,7 @@ export interface MFCHeaderNavigatorProps {
 
 export const MFCHeaderNavigator: FC<MFCHeaderNavigatorProps> = (props) => {
     const { categories, onCategorySelect, activeCategoryId } = props;
+    if (categories.length === 0) return null;
     return (
         <MFCHeaderNavigatorWrapper>
             <FlexBox gap>
