@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { toast } from 'react-toastify';
 import { APIControllerResponse, AuthAPI, JwtResponse } from '../api';
-import { SigninProps } from '../api/methods/auth';
+import { SigninProps } from '../api/api.auth';
 
 export const loginAction = createAsyncThunk(
     'auth/loginAction',

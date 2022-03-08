@@ -1,7 +1,6 @@
-import { CommonDataAPI, MetaProfileAPI } from '../api';
+import { CommonDataAPI, MetaProfileAPI, MetaProfileCategory } from '../api';
 import { useTranslation } from 'react-i18next';
 import { useCallback, useEffect, useState } from 'react';
-import { MetaProfileCategory } from '../api/classes/metaprofile/types';
 
 export const useApiCommonSearch = () => {
     const [timer, setTimer] = useState<any>();

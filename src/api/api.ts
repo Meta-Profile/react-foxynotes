@@ -1,14 +1,14 @@
 /**
  * Main api class
  */
-import { APIRequest } from './APIRequest';
+import { Request } from './request';
 
 export class API {
     /**
      * Строитель API запросов
      * @param url
      */
-    public request(url: string): APIRequest {
-        return new APIRequest(url);
+    public request(url: string): Request {
+        return new Request(url);
     }
 }

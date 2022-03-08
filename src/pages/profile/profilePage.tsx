@@ -2,7 +2,7 @@ import { FC, useCallback, useEffect, useMemo, useState } from 'react';
 import { ProfilePageMainContainer, ProfilePageWrapper } from './styles';
 import { MFCBox, MFCEmpty, MfcHeader } from '../../components/metaFieldContainer';
 import { ProfileBanner } from '../../components/profileBanner';
-import { metaprofilemock } from '../../api/classes/metaprofile/metaprofile.test';
+import { metaprofilemock } from '../../tests/metaprofile.test';
 import { ThemeProvider, useTheme } from 'styled-components';
 import tinycolor2 from 'tinycolor2';
 import { useTranslation } from 'react-i18next';
@@ -13,7 +13,7 @@ import { SearchBox } from '../../components';
 import { useApiCommonSearch } from '../../hooks/useApiCommonSearch';
 import { CommonDataAPI } from '../../api';
 import { ActionMeta, OnChangeValue } from 'react-select';
-import { CommonData } from '../../api/classes/commondata';
+import { ApiCommondata } from '../../api/api.commondata';
 
 export const ProfilePage: FC = () => {
     const { t, i18n } = useTranslation();

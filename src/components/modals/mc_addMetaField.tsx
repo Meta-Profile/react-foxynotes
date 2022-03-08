@@ -2,7 +2,6 @@ import { FC, useCallback, useEffect, useState } from 'react';
 import { ModalContainer } from './modalContainer';
 import { useTranslation } from 'react-i18next';
 import { Box, Button, FlexBox, SearchBox } from '../index';
-import { MetaProfileCategory, MetaProfileField } from '../../api/classes/metaprofile/types';
 import {
     useApiMetaProfileCategoriesFetch,
     useApiMetaProfileCategoriesSearch,
@@ -11,6 +10,7 @@ import {
     useApiMetaProfileFieldsFetch,
     useApiMetaProfileFieldsSearch,
 } from '../../hooks/useApiMetaProfileFields';
+import { MetaProfileCategory, MetaProfileField } from '../../api';
 
 export interface MCAddMetaFieldProps {
     onClose?: () => void;

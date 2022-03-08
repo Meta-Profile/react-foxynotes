@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useCallback } from 'react';
-import { SigninProps } from '../../api/methods/auth';
+import { SigninProps } from '../../api/api.auth';
 import { loginAction } from '../slice';
 import { AuthSelector } from '../selectors';
 
