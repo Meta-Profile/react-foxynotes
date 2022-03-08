@@ -115,7 +115,10 @@ export const ProfilePage: FC = () => {
                     {profile.composition.map((category) => {
                         if (category.category.mpcId === activeCategory) {
                             return category.fields.map((field) => (
-                                <MFCBox key={field.mpdId} title={field.field.title}>
+                                <MFCBox
+                                    isEditMode={isEdit}
+                                    key={field.mpdId}
+                                    title={field.field.title}>
                                     {JSON.stringify(field.data)}
                                 </MFCBox>
                             ));
