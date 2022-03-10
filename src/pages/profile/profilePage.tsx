@@ -8,15 +8,15 @@ import { useTranslation } from 'react-i18next';
 import { Footer } from '../../components/Footer';
 import { MCAddMetaField } from '../../components/modals';
 import { SliderPicker } from 'react-color';
-import { CommonDataAPI, MetaProfile, MetaProfileAPI } from '../../api';
+import { MetaProfile, MetaProfileAPI } from '../../api';
 import { MetaProfileHeader } from '../../components/MetaProfileHeader';
 import { useDebouncedCallback } from 'use-debounce';
-import { useParams } from 'react-router-dom';
 import { useIsMobile } from '../../hooks/useIsMobile';
+import { StandaloneHelper } from '../../helpers/standalone';
 
 export const ProfilePage: FC = () => {
     const { t, i18n } = useTranslation();
-    const { mpId, mpcId } = useParams<{ mpId: string; mpcId?: string }>();
+    const { mpId, mpcId } = { mpId: 1, mpcId: 1 };
 
     const [color, setColor] = useState('#000');
     const [profile, setProfile] = useState<MetaProfile>();
@@ -70,10 +70,7 @@ export const ProfilePage: FC = () => {
                 if (i >= 100) break;
             }
         }
-        document
-            .querySelectorAll('meta[name="theme-color"]')
-            .forEach((value) => value.setAttribute('content', bannerColor.toHexString()));
-        document.body.style.background = bannerColor.toHexString();
+        StandaloneHelper.setColor(bannerColor.toHexString());
 
         setNewTheme({
             banner: isMobile

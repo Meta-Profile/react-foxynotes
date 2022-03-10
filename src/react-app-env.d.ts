@@ -3,19 +3,11 @@
 /// <reference types="react" />
 /// <reference types="react-dom" />
 
-import 'styled-components';
-import { defaultTheme } from '../../theme/defaultTheme';
-
 declare namespace NodeJS {
     interface ProcessEnv {
         readonly NODE_ENV: 'development' | 'production' | 'test';
         readonly PUBLIC_URL: string;
     }
-}
-
-// and extend them!
-declare module 'styled-components' {
-    export type DefaultTheme = typeof defaultTheme;
 }
 
 declare module '*.avif' {

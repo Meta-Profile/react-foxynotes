@@ -44,7 +44,7 @@ export const ButtonTabBarButton = styled.div<{ active?: boolean }>`
     }
 `;
 
-export const BottomTabBarAvatar = styled.div<{ url?: string }>`
+export const BottomTabBarAvatar = styled.div<{ url?: string; active?: boolean }>`
     width: 30px;
     min-width: 30px;
     max-width: 30px;
@@ -56,7 +56,7 @@ export const BottomTabBarAvatar = styled.div<{ url?: string }>`
     background-size: cover;
     /* Black 70 */
 
-    border: 1px solid ${(p) => p.theme.colors.black70};
+    border: 1px solid ${(p) => (p.active ? p.theme.colors.primary : p.theme.colors.black70)};
     box-sizing: border-box;
     border-radius: 100px;
 `;

@@ -9,3 +9,12 @@ export function isInStandaloneMode() {
         document.referrer.includes('android-app://')
     );
 }
+
+export class StandaloneHelper {
+    public static setColor(color: string) {
+        document
+            .querySelectorAll('meta[name="theme-color"]')
+            .forEach((value) => value.setAttribute('content', color));
+        document.body.style.background = color;
+    }
+}

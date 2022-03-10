@@ -1,17 +1,30 @@
 import { ViewControllerProps } from '../CoreViewController';
 import { DefaultViewController } from '../DefaultViewController';
-import { FC, useEffect } from 'react';
+import { FC, useCallback, useEffect } from 'react';
 import { useTheme } from 'styled-components';
 import { defaultTheme } from '../../theme/defaultTheme';
 import { StandaloneHelper } from '../../helpers/standalone';
 import { useNavigator } from '../../hooks/useNavigator';
-import { Button, Text } from '../../components';
-import { RoutesConfig } from '../../config/routes';
+import { Button, Divider, Text } from '../../components';
+import { useDispatch, useSelector } from 'react-redux';
+import { getAuth } from '../../selectors';
+import { logout } from '../../slices/auth';
 import { FlexBoxCenter } from '../../components/FlexBox';
 
-export const HomeViewController: FC<ViewControllerProps> = (props) => {
+export const UserViewController: FC<ViewControllerProps> = (props) => {
     const { children, ...appState } = props;
     const { present } = useNavigator();
+
+    // ===========================================================================
+    // Selectors
+    // ===========================================================================
+    const { user } = useSelector(getAuth);
+
+    // ===========================================================================
+    // Dispatch
+    // ===========================================================================
+    const dispatch = useDispatch();
+    const _logout = useCallback(() => dispatch(logout()), [dispatch]);
 
     // ===========================================================================
     // Theming
@@ -26,9 +39,9 @@ export const HomeViewController: FC<ViewControllerProps> = (props) => {
         <DefaultViewController {...appState}>
             <FlexBoxCenter column gap>
                 <Text type={'title'} color={'white'}>
-                    Home Controller
+                    User Controller
                 </Text>
-                <Button onClick={() => present(RoutesConfig.paths.profile)}>test profile</Button>
+                <Button onClick={() => _logout()}>logout</Button>
             </FlexBoxCenter>
         </DefaultViewController>
     );
