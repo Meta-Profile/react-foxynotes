@@ -1,48 +1,49 @@
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
-import React, { FC } from 'react';
-import LoginPage from '../pages/LoginPage';
-import ProfilePage from '../pages/profile';
-import { PrivateRoute } from './PrivateRoute';
+import { BrowserRouter } from 'react-router-dom';
+import React, { FC, useMemo } from 'react';
 import { RoutesConfig } from '../config/routes';
-import { SpacePage } from '../pages/SpacePage';
 import { NavBar } from '../components/NavBar';
+import { BottomTabBar } from '../components/BottomTabBar';
+import { useNavigator } from '../hooks/useNavigator';
+import { HomeViewController } from '../controllers/HomeViewController';
+import { LoginViewController } from '../controllers/LoginViewController';
+import { ProfileViewController } from '../controllers/ProfileViewController';
+import { useSelector } from 'react-redux';
+import { getAuth } from '../selectors';
+import { UserViewController } from '../controllers/UserViewController';
 
-// const ProfilePage = lazy(() => import('../pages/profile'));
+export interface RouterProps {
+    isMobile: boolean;
+    isStandalone: boolean;
+}
 
-export const Router: FC = (props) => {
-    const { children } = props;
+export const BasePaths = {
+    error: { component: () => null, private: false },
+    private: { component: LoginViewController, private: false },
+    [RoutesConfig.paths.home]: { component: HomeViewController, private: true },
+    [RoutesConfig.paths.profile]: { component: ProfileViewController, private: true },
+    [RoutesConfig.paths.user]: { component: UserViewController, private: true },
+};
+
+export const Router: FC<RouterProps> = (props) => {
+    const { user } = useSelector(getAuth);
+    const { isMobile, isStandalone } = props;
+    const { current, args } = useNavigator();
+
+    // Выбор текущего компонента с учетом приватности
+    const Component = useMemo(
+        () =>
+            current && current in BasePaths
+                ? !BasePaths[current].private || (BasePaths[current].private && user)
+                    ? BasePaths[current].component
+                    : BasePaths['private'].component
+                : null,
+        [current]
+    );
     return (
         <BrowserRouter>
-            <NavBar />
-            {children}
-            <Switch>
-                <PrivateRoute
-                    exact
-                    path={RoutesConfig.paths.home}
-                    component={() => <SpacePage />}
-                />
-                <PrivateRoute
-                    exact
-                    path={RoutesConfig.paths.profile}
-                    component={() => <ProfilePage />}
-                />
-                <PrivateRoute
-                    exact
-                    path={RoutesConfig.paths.profileMetaId(':mpId')}
-                    component={() => <ProfilePage />}
-                />
-                <PrivateRoute
-                    exact
-                    path={RoutesConfig.paths.profileMetaIdCategory(':mpId', ':mpcId')}
-                    component={() => <ProfilePage />}
-                />
-                <Route exact path={RoutesConfig.paths.signIn} component={() => <LoginPage />} />
-                <Route
-                    exact
-                    path={RoutesConfig.paths.signUp}
-                    component={() => <LoginPage signup={true} />}
-                />
-            </Switch>
+            {!isMobile && user && <NavBar />}
+            {isMobile && user && <BottomTabBar />}
+            {Component && <Component {...{ ...args, isMobile, isStandalone }} />}
         </BrowserRouter>
     );
 };

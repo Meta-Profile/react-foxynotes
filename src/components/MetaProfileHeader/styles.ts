@@ -10,6 +10,35 @@ export const MetaProfileHeaderWrapper = styled.div`
     padding: 16px 16px 40px;
 `;
 
+export const MetaProfileHeaderMobileWrapper = styled.div`
+    //padding-top: 40px;
+    background: ${(p) => p.theme.banner};
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 10000;
+`;
+
+export const MetaProfileHeaderMobileStatic = styled.div`
+    display: flex;
+    justify-content: center;
+    //margin: 16px 0;
+    padding-top: 66px;
+    padding-bottom: 100px;
+    align-items: center;
+    background: ${(p) => p.theme.banner};
+`;
+
+export const MetaProfileHeaderMobileContainer = styled.div`
+    height: 50px;
+    justify-content: space-between;
+    align-items: center;
+    color: ${(p) => p.theme.colors.white};
+    display: flex;
+    margin: 0 16px;
+`;
+
 export const MetaProfileHeaderContainer = styled.div`
     display: flex;
     flex-direction: column;

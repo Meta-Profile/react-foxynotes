@@ -9,10 +9,11 @@ export interface MetaFieldContainerTitleProps {
     title: string;
     isEditMode?: boolean;
     onEditRequest?: (value: string) => void;
+    isMobile?: boolean;
 }
 
 export const MFCBox: FC<MetaFieldContainerTitleProps> = (props) => {
-    const { title, children, isEditMode, onEditRequest } = props;
+    const { title, children, isEditMode, onEditRequest, isMobile } = props;
     const [isEdit, setIsEdit] = useState(false);
     const baseChildren = useMemo(() => children, []);
 

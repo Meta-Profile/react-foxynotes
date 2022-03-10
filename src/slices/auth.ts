@@ -3,7 +3,7 @@ import { toast } from 'react-toastify';
 import { APIControllerResponse, AuthAPI, JwtResponse } from '../api';
 import { SigninProps } from '../api/api.auth';
 import { UserAPI, UserDetails } from '../api/api.user';
-import { LocalStorageUtils } from '../common/localstorage';
+import { LocalStorageUtils } from '../helpers/localstorage';
 
 export const loginAction = createAsyncThunk(
     'auth/loginAction',
@@ -11,6 +11,9 @@ export const loginAction = createAsyncThunk(
         return await AuthAPI.signin(props);
     }
 );
+export const logout = createAsyncThunk('auth/logoutAction', async (): Promise<Boolean> => {
+    return Promise.resolve(true);
+});
 
 export const authenticate = createAsyncThunk(
     'auth/authenticate',
@@ -57,6 +60,7 @@ export const AuthSlice = createSlice({
             state.token = response.token;
             state.error = '';
             localStorage.setItem('token', response.token);
+            window.location.reload();
         },
         //
         // Authentications
@@ -74,6 +78,26 @@ export const AuthSlice = createSlice({
         ) => {
             state.user = action.payload.response;
             state.loading = false;
+        },
+        //
+        // Logout
+        //
+        [logout.pending.toString()]: (state) => {
+            state.loading = true;
+        },
+        [logout.rejected.toString()]: (state, action) => {
+            state.user = undefined;
+            state.token = undefined;
+            state.loading = false;
+        },
+        [logout.fulfilled.toString()]: (
+            state,
+            action: PayloadAction<APIControllerResponse<UserDetails>>
+        ) => {
+            state.user = undefined;
+            state.token = undefined;
+            state.loading = false;
+            localStorage.removeItem('token');
         },
     },
 });

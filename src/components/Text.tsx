@@ -1,6 +1,7 @@
 import styled, { css } from 'styled-components';
 import { Box } from './Box';
 import { FlexBox } from './FlexBox';
+import { MobileConfig } from '../config/mobile';
 
 export type TextType =
     | 'normal'
@@ -21,6 +22,13 @@ export const TextCss = {
         font-weight: normal;
         font-size: 15px;
         line-height: 20px;
+
+        @media (max-width: ${MobileConfig.breakpoint}px) {
+            font-style: normal;
+            font-weight: normal;
+            font-size: 12px;
+            line-height: 17px;
+        }
     `,
 };
 
@@ -33,6 +41,12 @@ const TextSize = (type: TextType) => {
                 font-size: 20px;
                 line-height: 32px;
                 letter-spacing: -0.02em;
+                @media (max-width: ${MobileConfig.breakpoint}px) {
+                    font-style: normal;
+                    font-weight: normal;
+                    font-size: 16px;
+                    line-height: 21px;
+                }
             `;
         case 'title':
             return css`
@@ -41,6 +55,13 @@ const TextSize = (type: TextType) => {
                 font-size: 60px;
                 line-height: 64px;
                 letter-spacing: -0.02em;
+
+                @media (max-width: ${MobileConfig.breakpoint}px) {
+                    font-style: normal;
+                    font-weight: 600;
+                    font-size: 24px;
+                    line-height: 26px;
+                }
             `;
         case 'section':
             return css`

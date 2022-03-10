@@ -8,18 +8,20 @@ import { useTranslation } from 'react-i18next';
 import { Footer } from '../../components/Footer';
 import { MCAddMetaField } from '../../components/modals';
 import { SliderPicker } from 'react-color';
-import { CommonDataAPI, MetaProfile, MetaProfileAPI } from '../../api';
+import { MetaProfile, MetaProfileAPI } from '../../api';
 import { MetaProfileHeader } from '../../components/MetaProfileHeader';
 import { useDebouncedCallback } from 'use-debounce';
-import { useParams } from 'react-router-dom';
+import { useIsMobile } from '../../hooks/useIsMobile';
+import { StandaloneHelper } from '../../helpers/standalone';
 
 export const ProfilePage: FC = () => {
     const { t, i18n } = useTranslation();
-    const { mpId, mpcId } = useParams<{ mpId: string; mpcId?: string }>();
+    const { mpId, mpcId } = { mpId: 1, mpcId: 1 };
 
     const [color, setColor] = useState('#000');
     const [profile, setProfile] = useState<MetaProfile>();
     const [activeCategory, setActiveCategory] = useState<number>(1);
+    const isMobile = useIsMobile();
 
     /**
      * Основной useEffect, который влияет на отображение мета-профиля
@@ -68,18 +70,22 @@ export const ProfilePage: FC = () => {
                 if (i >= 100) break;
             }
         }
+        StandaloneHelper.setColor(bannerColor.toHexString());
+
         setNewTheme({
-            banner: `linear-gradient(180deg, ${bannerColor.toHexString()} 0%, ${bannerColor
-                .clone()
-                .darken(5)
-                .toHexString()} 100%)`,
+            banner: isMobile
+                ? bannerColor.toHexString()
+                : `linear-gradient(180deg, ${bannerColor.toHexString()} 0%, ${bannerColor
+                      .clone()
+                      .darken(5)
+                      .toHexString()} 100%)`,
             colors: {
                 ...theme.colors,
                 primary: primaryColor.toHexString(),
                 secondary: secondaryColor.toHexString(),
             },
         });
-    }, [theme, color]);
+    }, [theme, color, isMobile]);
 
     const onEditButtonClick = useCallback(() => {
         setIsEdit(!isEdit);
@@ -91,6 +97,7 @@ export const ProfilePage: FC = () => {
         <ThemeProvider theme={newTheme}>
             <ProfilePageWrapper>
                 <MetaProfileHeader
+                    isMobile={isMobile}
                     title={profile.title}
                     categories={categories}
                     onEditClick={onEditButtonClick}
@@ -99,15 +106,17 @@ export const ProfilePage: FC = () => {
                 />
                 <ProfilePageMainContainer>
                     {isEdit && (
-                        <MFCBox title={t('profile_color_chose')}>
-                            <SliderPicker
-                                color={color}
-                                onChange={(v) => {
-                                    setColor(v.hex);
-                                    update();
-                                }}
-                            />
-                        </MFCBox>
+                        <div style={{ userSelect: 'none' }}>
+                            <MFCBox isMobile={isMobile} title={t('profile_color_chose')}>
+                                <SliderPicker
+                                    color={color}
+                                    onChange={(v) => {
+                                        setColor(v.hex);
+                                        update();
+                                    }}
+                                />
+                            </MFCBox>
+                        </div>
                     )}
                     {profile.composition.length < 1 && (
                         <MFCEmpty onAddClick={() => setModalAddFieldVisible(true)} />
@@ -116,6 +125,7 @@ export const ProfilePage: FC = () => {
                         if (category.category.mpcId === activeCategory) {
                             return category.fields.map((field) => (
                                 <MFCBox
+                                    isMobile={isMobile}
                                     isEditMode={isEdit}
                                     key={field.mpdId}
                                     title={field.field.title}>

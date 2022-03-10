@@ -79,6 +79,8 @@ const IconWrapper = styled(FlexBoxCenter)<{ size?: '20' | 'm' }>`
     text-align: center;
     justify-content: center;
     letter-spacing: -0.02em;
+    font-style: normal;
+    font-weight: 900;
     ${(p) => SizeMixin(p.size)};
 `;
 

@@ -5,7 +5,7 @@ import { Space } from './Box';
 import { Text } from './Text';
 import { Divider } from './Divider';
 import { useTranslation } from 'react-i18next';
-import { setLocalstorageLang } from '../common/language';
+import { setLocalstorageLang } from '../helpers/language';
 
 const FooterWrapper = styled(FlexBox)`
     width: 100%;

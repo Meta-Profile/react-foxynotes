@@ -4,6 +4,7 @@ import { FC } from 'react';
 import { BoxProps, Space } from './Box';
 import { FlexBox } from './FlexBox';
 import { Icon, IconType } from './Icon';
+import { MobileConfig } from '../config/mobile';
 
 export type ButtonType = 'primary' | 'secondary' | 'grey' | 'black';
 
@@ -46,14 +47,23 @@ const ButtonPaddingMixin = (icon?: IconType, content?: any) => {
     if (!icon && content)
         return css`
             padding: 8px 16px;
+            @media (max-width: ${MobileConfig.breakpoint}px) {
+                padding: 6px 10px;
+            }
         `;
     if (icon && content)
         return css`
             padding: 8px 16px 8px 10px;
+            @media (max-width: ${MobileConfig.breakpoint}px) {
+                padding: 6px 10px 6px 6px;
+            }
         `;
     if (icon && !content)
         return css`
             padding: 8px 10px;
+            @media (max-width: ${MobileConfig.breakpoint}px) {
+                padding: 6px;
+            }
         `;
 };
 
@@ -63,12 +73,12 @@ export const ButtonWrapper = styled(FlexBox)<ButtonProps & { flag: boolean }>`
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    padding: 8px 16px;
     height: 40px;
     max-height: 40px;
     min-height: 40px;
     user-select: none;
     cursor: pointer;
+    gap: 8px;
     flex-shrink: 0;
     ${(p) => ButtonTypeMixin(p.type, p.theme)};
     ${(p) => ButtonPaddingMixin(p.icon, p.flag)};
@@ -82,6 +92,12 @@ export const ButtonWrapper = styled(FlexBox)<ButtonProps & { flag: boolean }>`
                   cursor: not-allowed;
               `
             : null};
+    @media (max-width: ${MobileConfig.breakpoint}px) {
+        height: 32px;
+        max-height: 32px;
+        min-height: 32px;
+        gap: 6px;
+    }
 `;
 
 export const Button: FC<ButtonProps> = (props) => {
@@ -91,8 +107,7 @@ export const Button: FC<ButtonProps> = (props) => {
             disabled={disabled}
             onClick={onClick && !disabled ? onClick : undefined}
             {...wrapperProps}
-            flag={!!children}
-            gap={Space.small}>
+            flag={!!children}>
             {wrapperProps.icon ? <Icon type={wrapperProps.icon} /> : null}
             {children}
         </ButtonWrapper>

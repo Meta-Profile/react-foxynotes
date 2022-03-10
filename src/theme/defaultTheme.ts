@@ -2,6 +2,7 @@ import { ColorType } from './types';
 
 const white = '#FEFEFE';
 
+const black95 = '#292929';
 const black100 = '#151514';
 const blackAbsolute = '#000000';
 

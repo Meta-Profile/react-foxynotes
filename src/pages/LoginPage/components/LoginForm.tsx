@@ -1,26 +1,46 @@
-import { FC, useCallback, useState } from 'react';
+import { FC, useCallback, useEffect, useState } from 'react';
 import { LoginFormWrapper } from './styles';
 import { Button } from '../../../components';
 import { Divider } from '../../../components';
 import { Text, TextFlexBox } from '../../../components/Text';
 import { Input } from '../../../components';
-import { useAuth } from '../../../auth/hooks/useAuth';
 import { useTranslation } from 'react-i18next';
 import { useHistory } from 'react-router-dom';
 import { RoutesConfig } from '../../../config/routes';
+import { useDispatch, useSelector } from 'react-redux';
+import { loginAction } from '../../../slices/auth';
+import { SigninProps } from '../../../api/api.auth';
+import { getAuth } from '../../../selectors';
 
 export const LoginForm: FC = (props) => {
     const { t } = useTranslation();
     const history = useHistory();
 
+    // ===========================================================================
+    // Selectors
+    // ===========================================================================
+    const { user } = useSelector(getAuth);
+
+    // ===========================================================================
+    // Dispatch
+    // ===========================================================================
+    const dispatch = useDispatch();
+    const _login = useCallback((props: SigninProps) => dispatch(loginAction(props)), [dispatch]);
+
+    // ===========================================================================
+    // Hooks
+    // ===========================================================================
+
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
 
-    const { login } = useAuth();
-
     const onButtonClick = useCallback(async () => {
-        login({ username, password });
-    }, [username, password, login]);
+        _login({ username, password });
+    }, [username, password, _login]);
+
+    useEffect(() => {
+        if (user) history.push(RoutesConfig.paths.home);
+    }, [user]);
 
     const onSwitchFormClick = useCallback(() => {
         history.push(RoutesConfig.paths.signUp);

@@ -7,5 +7,6 @@ export const RoutesConfig = {
         profileMetaIdCategory: (mpId: string | number, mpcId: string | number) =>
             RoutesConfig.paths.profile + '/' + mpId + '/' + mpcId,
         home: '/',
+        user: '/user',
     },
 };

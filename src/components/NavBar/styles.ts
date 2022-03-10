@@ -8,7 +8,7 @@ export const NavBarHolder = styled.div`
 
 export const NavBarWrapper = styled.div`
     position: fixed;
-    background-color: ${(p) => p.theme.colors.black100};
+    background-color: ${(p) => p.theme.colors.blackAbsolute};
     display: flex;
     height: 64px;
     width: 100%;
