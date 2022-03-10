@@ -10,12 +10,12 @@ export const useIsMobile = (): boolean => {
     const [isMobile, setIsMobile] = useState(isMobileDevice());
 
     useEffect(() => {
-       const listener = () => {
-           setIsMobile(window.innerWidth < MobileConfig.breakpoint);
-       };
+        const listener = () => {
+            setIsMobile(window.innerWidth < MobileConfig.breakpoint);
+        };
 
-       window.addEventListener("resize", listener);
-       return () => window.removeEventListener("resize", listener);
+        window.addEventListener('resize', listener);
+        return () => window.removeEventListener('resize', listener);
     });
 
     return isMobile;

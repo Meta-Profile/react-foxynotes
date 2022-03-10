@@ -4,6 +4,9 @@ import {
     MetaProfileHeaderAvatarSmile,
     MetaProfileHeaderAvatarWrapper,
     MetaProfileHeaderContainer,
+    MetaProfileHeaderMobileContainer,
+    MetaProfileHeaderMobileStatic,
+    MetaProfileHeaderMobileWrapper,
     MetaProfileHeaderNavigatorWrapper,
     MetaProfileHeaderTitle,
     MetaProfileHeaderUpperLine,
@@ -25,10 +28,41 @@ export interface MetaProfileHeaderProps {
     // category
     onCategorySelect?: (category: MetaProfileCategory) => void;
     activeCategoryId?: number;
+
+    isMobile?: boolean;
 }
 
 export const MetaProfileHeader: FC<MetaProfileHeaderProps> = (props) => {
-    const { categories, onEditClick, title, onCategorySelect, activeCategoryId } = props;
+    const { categories, onEditClick, title, onCategorySelect, activeCategoryId, isMobile } = props;
+    if (isMobile) {
+        return (
+            <>
+                <MetaProfileHeaderMobileWrapper>
+                    <MetaProfileHeaderMobileContainer>
+                        <div onClick={onEditClick}>
+                            <Icon type={'edit'} />
+                        </div>
+                        <div>
+                            <Text type={'title'}>{title}</Text>
+                        </div>
+                        <div>
+                            <Icon type={'qr'} />
+                        </div>
+                    </MetaProfileHeaderMobileContainer>
+                </MetaProfileHeaderMobileWrapper>
+                <MetaProfileHeaderMobileStatic>
+                    <MetaProfileHeaderAvatarWrapper>
+                        <MetaProfileHeaderAvatarContainer
+                            url={
+                                'https://yobte.ru/uploads/posts/2019-11/devushka-s-chernymi-glazami-i-chernymi-volosami-64-foto-7.jpg'
+                            }
+                        />
+                        <MetaProfileHeaderAvatarSmile>😏</MetaProfileHeaderAvatarSmile>
+                    </MetaProfileHeaderAvatarWrapper>
+                </MetaProfileHeaderMobileStatic>
+            </>
+        );
+    }
     return (
         <MetaProfileHeaderWrapper>
             <MetaProfileHeaderContainer>

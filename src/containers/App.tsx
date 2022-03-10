@@ -7,9 +7,15 @@ import { ThemeProvider } from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAuth } from '../selectors';
 import { authenticate } from '../slices/auth';
-import { NavBar } from '../components/NavBar';
 
-export const App: FC = () => {
+export interface AppProps {
+    isMobile: boolean;
+    isStandalone: boolean;
+}
+
+export const App: FC<AppProps> = (props) => {
+    const { isMobile, isStandalone } = props;
+
     // ===========================================================================
     // Selectors
     // ===========================================================================
@@ -34,7 +40,7 @@ export const App: FC = () => {
         <ThemeProvider theme={Themes.default}>
             <Reset />
             <ToastContainer />
-            <Router />
+            <Router isMobile={isMobile} isStandalone={isStandalone} />
         </ThemeProvider>
     );
 };

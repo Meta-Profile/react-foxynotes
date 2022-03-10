@@ -9,18 +9,15 @@ export const NavBar: FC = () => {
     const { user } = useSelector(getAuth);
     if (!user) return null;
     return (
-        <>
-            <NavBarWrapper>
-                <NavBarContainer>
-                    <Text type={'small'} color={'whiteAbsolute'}>
-                        META LOGO
-                    </Text>
-                    <NavBarButtonsContainer>
-                        <BottomTaBarButtons />
-                    </NavBarButtonsContainer>
-                </NavBarContainer>
-            </NavBarWrapper>
-            <NavBarHolder />
-        </>
+        <NavBarWrapper>
+            <NavBarContainer>
+                <Text type={'small'} color={'whiteAbsolute'}>
+                    META LOGO
+                </Text>
+                <NavBarButtonsContainer>
+                    <BottomTaBarButtons />
+                </NavBarButtonsContainer>
+            </NavBarContainer>
+        </NavBarWrapper>
     );
 };

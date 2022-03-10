@@ -3,7 +3,7 @@ import { toast } from 'react-toastify';
 import { APIControllerResponse, AuthAPI, JwtResponse } from '../api';
 import { SigninProps } from '../api/api.auth';
 import { UserAPI, UserDetails } from '../api/api.user';
-import { LocalStorageUtils } from '../common/localstorage';
+import { LocalStorageUtils } from '../helpers/localstorage';
 
 export const loginAction = createAsyncThunk(
     'auth/loginAction',

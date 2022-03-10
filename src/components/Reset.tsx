@@ -39,6 +39,7 @@ export const Reset = createGlobalStyle`
 
   html{
     background-color: #151514;
+    -webkit-tap-highlight-color: rgba(201, 224, 253, 0.0);
   }
   /* Выставляем основные настройки по-умолчанию для body */
   body {

@@ -3,7 +3,7 @@ import { initReactI18next } from 'react-i18next';
 
 import ru from './translate/ru.json';
 import en from './translate/en.json';
-import { getActiveLang } from './common/language';
+import { getActiveLang } from './helpers/language';
 
 declare module 'react-i18next' {
     interface CustomTypeOptions {
