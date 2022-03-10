@@ -136,7 +136,6 @@ export const ProfilePage: FC = () => {
                     })}
                 </ProfilePageMainContainer>
             </ProfilePageWrapper>
-            <Footer />
             {modalAddFieldVisible && (
                 <MCAddMetaField onClose={() => setModalAddFieldVisible(false)} />
             )}
