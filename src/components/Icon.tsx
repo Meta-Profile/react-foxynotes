@@ -18,6 +18,7 @@ import {
     faWarehouse,
     faBell,
     faTrash,
+    faChevronLeft,
 } from '@fortawesome/free-solid-svg-icons';
 
 export const dict: Record<string, IconDefinition> = {
@@ -34,6 +35,7 @@ export const dict: Record<string, IconDefinition> = {
     warehouse: faWarehouse,
     feed: faBell,
     trash: faTrash,
+    back: faChevronLeft,
 };
 
 export type IconType =
@@ -49,7 +51,8 @@ export type IconType =
     | 'search'
     | 'share'
     | 'qr'
-    | 'caret-down';
+    | 'caret-down'
+    | 'back';
 
 export interface IconProps extends BoxProps {
     type: IconType;

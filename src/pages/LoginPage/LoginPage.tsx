@@ -9,7 +9,7 @@ import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { getAuth } from '../../selectors';
 import { useHistory } from 'react-router-dom';
-import { RoutesConfig } from '../../config/routes';
+import { NavigatorConfig } from '../../config/routes';
 
 export interface LoginPageProps {
     signup?: boolean;
@@ -22,7 +22,7 @@ export const LoginPage: FC<LoginPageProps> = (props) => {
     const { t } = useTranslation();
 
     useEffect(() => {
-        if (user) history.push(RoutesConfig.paths.home);
+        if (user) history.push(NavigatorConfig.paths.home);
     }, [user]);
 
     return (

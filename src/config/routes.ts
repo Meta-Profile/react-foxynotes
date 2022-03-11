@@ -1,12 +1,13 @@
-export const RoutesConfig = {
+export const NavigatorConfig = {
     paths: {
+        add: '!add',
+        search: '!search',
+        feed: '!feed',
         signIn: '/login/signin',
         signUp: '/login/signup',
         profile: '/profile',
-        profileMetaId: (mpId: string | number) => RoutesConfig.paths.profile + '/' + mpId,
-        profileMetaIdCategory: (mpId: string | number, mpcId: string | number) =>
-            RoutesConfig.paths.profile + '/' + mpId + '/' + mpcId,
-        home: '/',
-        user: '/user',
+        profileMetaId: (mpId: string | number) => NavigatorConfig.paths.profile + '/' + mpId,
+        home: '!',
+        user: '!user',
     },
 };

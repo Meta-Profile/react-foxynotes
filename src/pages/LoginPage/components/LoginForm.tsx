@@ -6,7 +6,7 @@ import { Text, TextFlexBox } from '../../../components/Text';
 import { Input } from '../../../components';
 import { useTranslation } from 'react-i18next';
 import { useHistory } from 'react-router-dom';
-import { RoutesConfig } from '../../../config/routes';
+import { NavigatorConfig } from '../../../config/routes';
 import { useDispatch, useSelector } from 'react-redux';
 import { loginAction } from '../../../slices/auth';
 import { SigninProps } from '../../../api/api.auth';
@@ -39,11 +39,11 @@ export const LoginForm: FC = (props) => {
     }, [username, password, _login]);
 
     useEffect(() => {
-        if (user) history.push(RoutesConfig.paths.home);
+        if (user) history.push(NavigatorConfig.paths.home);
     }, [user]);
 
     const onSwitchFormClick = useCallback(() => {
-        history.push(RoutesConfig.paths.signUp);
+        history.push(NavigatorConfig.paths.signUp);
     }, [history]);
 
     return (

@@ -8,11 +8,12 @@ import { SigninProps } from '../../api/api.auth';
 import { loginAction } from '../../slices/auth';
 import { useTranslation } from 'react-i18next';
 import { useNavigator } from '../../hooks/useNavigator';
-import { RoutesConfig } from '../../config/routes';
+import { NavigatorConfig } from '../../config/routes';
 import { TextFlexBox } from '../../components/Text';
 import { StandaloneHelper } from '../../helpers/standalone';
 import { useTheme } from 'styled-components';
 import { defaultTheme } from '../../theme/defaultTheme';
+import { isMobile, isStandalone } from '../../states';
 
 export const LoginViewController: FC<ViewControllerProps> = () => {
     const [username, setUsername] = useState('');
@@ -50,39 +51,49 @@ export const LoginViewController: FC<ViewControllerProps> = () => {
 
     useEffect(() => {
         if (user) {
-            present(RoutesConfig.paths.home);
+            present(NavigatorConfig.paths.home);
         }
     }, [user]);
 
-    return (
-        <LoginViewWrapperMobile>
-            <Text type={'title'}>{t('title')}</Text>
-            <LoginViewFormContainer>
-                <Input
-                    value={username}
-                    onInput={(event) => setUsername(event.currentTarget.value)}
-                    type="text"
-                    name="login"
-                    placeholder={t('login_form_username')}
-                />
-                <Input
-                    value={password}
-                    onInput={(event) => setPassword(event.currentTarget.value)}
-                    type="password"
-                    name="password"
-                    placeholder={t('login_form_password')}
-                />
-                <Button onClick={onButtonClick} type={'black'}>
-                    {t('login_form_signin')}
-                </Button>
-                <Divider />
-                <TextFlexBox justify={'center'} align={'center'} color={'black100'}>
-                    {t('login_form_no')}&nbsp;
-                    <Text onClick={() => null} color={'black40'}>
-                        {t('login_form_no_go')}
-                    </Text>
-                </TextFlexBox>
-            </LoginViewFormContainer>
-        </LoginViewWrapperMobile>
-    );
+    // ===========================================================================
+    // MOBILE || STANDALONE
+    // ===========================================================================
+    if (isMobile || isStandalone) {
+        return (
+            <LoginViewWrapperMobile>
+                <Text type={'title'}>{t('title')}</Text>
+                <LoginViewFormContainer>
+                    <Input
+                        value={username}
+                        onInput={(event) => setUsername(event.currentTarget.value)}
+                        type="text"
+                        name="login"
+                        placeholder={t('login_form_username')}
+                    />
+                    <Input
+                        value={password}
+                        onInput={(event) => setPassword(event.currentTarget.value)}
+                        type="password"
+                        name="password"
+                        placeholder={t('login_form_password')}
+                    />
+                    <Button onClick={onButtonClick} type={'black'}>
+                        {t('login_form_signin')}
+                    </Button>
+                    <Divider />
+                    <TextFlexBox justify={'center'} align={'center'} color={'black100'}>
+                        {t('login_form_no')}&nbsp;
+                        <Text onClick={() => null} color={'black40'}>
+                            {t('login_form_no_go')}
+                        </Text>
+                    </TextFlexBox>
+                </LoginViewFormContainer>
+            </LoginViewWrapperMobile>
+        );
+    }
+
+    // ===========================================================================
+    // DESKTOP
+    // ===========================================================================
+    return <div>Go to mobile, bitch</div>;
 };

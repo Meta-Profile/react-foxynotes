@@ -13,7 +13,7 @@ import { FlexBoxCenter } from '../../components/FlexBox';
 
 export const UserViewController: FC<ViewControllerProps> = (props) => {
     const { children, ...appState } = props;
-    const { present } = useNavigator();
+    const { updateNavigatorView } = useNavigator();
 
     // ===========================================================================
     // Selectors
@@ -32,15 +32,18 @@ export const UserViewController: FC<ViewControllerProps> = (props) => {
 
     const theme = useTheme() as typeof defaultTheme;
     useEffect(() => {
-        StandaloneHelper.setColor(theme.colors.black95);
-    }, [theme]);
+        StandaloneHelper.setBodyColor(theme.colors.black95);
+        StandaloneHelper.setColor(theme.colors.blackAbsolute);
+        updateNavigatorView({
+            title: 'User',
+            backgroundColor: theme.colors.blackAbsolute,
+        });
+    }, []);
 
     return (
-        <DefaultViewController {...appState}>
+        <DefaultViewController title={'Settings'} {...appState}>
             <FlexBoxCenter column gap>
-                <Text type={'title'} color={'white'}>
-                    User Controller
-                </Text>
+                <Text type={'title'} color={'white'}></Text>
                 <Button onClick={() => _logout()}>logout</Button>
             </FlexBoxCenter>
         </DefaultViewController>

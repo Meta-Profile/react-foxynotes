@@ -15,6 +15,9 @@ export class StandaloneHelper {
         document
             .querySelectorAll('meta[name="theme-color"]')
             .forEach((value) => value.setAttribute('content', color));
+    }
+    public static setBodyColor(color: string) {
         document.body.style.background = color;
+        // window.document.documentElement.style.background = color;
     }
 }
