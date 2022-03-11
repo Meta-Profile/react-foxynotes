@@ -5,7 +5,7 @@ import { FlexBox, FlexBoxColumn } from '../../components/FlexBox';
 import { MetaProfile, MetaProfileAPI } from '../../api';
 import { Box, Button } from '../../components';
 import { useHistory } from 'react-router-dom';
-import { RoutesConfig } from '../../config/routes';
+import { NavigatorConfig } from '../../config/routes';
 
 export const SpacePage: FC = () => {
     const { user } = useSelector(getAuth);
@@ -29,7 +29,9 @@ export const SpacePage: FC = () => {
                     </Box>
                     <Box padding>
                         <Button
-                            onClick={() => history.push(RoutesConfig.paths.profileMetaId(v.mpId))}>
+                            onClick={() =>
+                                history.push(NavigatorConfig.paths.profileMetaId(v.mpId))
+                            }>
                             Открыть
                         </Button>
                     </Box>

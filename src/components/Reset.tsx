@@ -11,7 +11,10 @@ export const Reset = createGlobalStyle`
   *::-webkit-scrollbar {
     width: 0px;
     height: 0px;
+    display: none; // Safari and Chrome
   }
+
+
 
   /* Убираем внутренние отступы */
   ul[class],

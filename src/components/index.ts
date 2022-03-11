@@ -7,5 +7,6 @@ import { Input } from './Input';
 import { Reset } from './Reset';
 import { Text } from './Text';
 import { SearchBox } from './SearchBox/SearchBox';
+import { Spacer } from './Spacer';
 
-export { Icon, Box, Button, Divider, FlexBox, Input, Reset, Text, SearchBox };
+export { Icon, Box, Button, Divider, FlexBox, Input, Reset, Text, SearchBox, Spacer };

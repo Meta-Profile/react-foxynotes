@@ -7,15 +7,13 @@ import { ThemeProvider } from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import { getAuth } from '../selectors';
 import { authenticate } from '../slices/auth';
+import { useNavigator } from '../hooks/useNavigator';
+import { DefaultNavBarController } from '../controllers/DefaultNavBarController';
+import { NavigatorConfig } from '../config/routes';
 
-export interface AppProps {
-    isMobile: boolean;
-    isStandalone: boolean;
-}
+export interface AppProps {}
 
 export const App: FC<AppProps> = (props) => {
-    const { isMobile, isStandalone } = props;
-
     // ===========================================================================
     // Selectors
     // ===========================================================================
@@ -30,8 +28,15 @@ export const App: FC<AppProps> = (props) => {
     // ===========================================================================
     // Hooks
     // ===========================================================================
+
+    const { present } = useNavigator();
+
     useEffect(() => {
         _authenticate();
+    }, []);
+
+    useEffect(() => {
+        present(NavigatorConfig.paths.home);
     }, []);
 
     if (loading) return <div>Loading...</div>;
@@ -40,7 +45,7 @@ export const App: FC<AppProps> = (props) => {
         <ThemeProvider theme={Themes.default}>
             <Reset />
             <ToastContainer />
-            <Router isMobile={isMobile} isStandalone={isStandalone} />
+            <Router />
         </ThemeProvider>
     );
 };

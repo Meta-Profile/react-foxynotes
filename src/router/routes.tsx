@@ -1,6 +1,6 @@
 import { BrowserRouter } from 'react-router-dom';
 import React, { FC, useMemo } from 'react';
-import { RoutesConfig } from '../config/routes';
+import { NavigatorConfig } from '../config/routes';
 import { NavBar } from '../components/NavBar';
 import { BottomTabBar } from '../components/BottomTabBar';
 import { useNavigator } from '../hooks/useNavigator';
@@ -10,23 +10,23 @@ import { ProfileViewController } from '../controllers/ProfileViewController';
 import { useSelector } from 'react-redux';
 import { getAuth } from '../selectors';
 import { UserViewController } from '../controllers/UserViewController';
+import { isDesktop, isNotDesktop } from '../states';
+import { AddViewController } from '../controllers/AddViewController';
+import { DefaultNavBarController } from '../controllers/DefaultNavBarController';
 
-export interface RouterProps {
-    isMobile: boolean;
-    isStandalone: boolean;
-}
+export interface RouterProps {}
 
 export const BasePaths = {
     error: { component: () => null, private: false },
     private: { component: LoginViewController, private: false },
-    [RoutesConfig.paths.home]: { component: HomeViewController, private: true },
-    [RoutesConfig.paths.profile]: { component: ProfileViewController, private: true },
-    [RoutesConfig.paths.user]: { component: UserViewController, private: true },
+    [NavigatorConfig.paths.add]: { component: AddViewController, private: false },
+    [NavigatorConfig.paths.home]: { component: HomeViewController, private: true },
+    [NavigatorConfig.paths.profile]: { component: ProfileViewController, private: true },
+    [NavigatorConfig.paths.user]: { component: UserViewController, private: true },
 };
 
 export const Router: FC<RouterProps> = (props) => {
     const { user } = useSelector(getAuth);
-    const { isMobile, isStandalone } = props;
     const { current, args } = useNavigator();
 
     // Выбор текущего компонента с учетом приватности
@@ -41,9 +41,12 @@ export const Router: FC<RouterProps> = (props) => {
     );
     return (
         <BrowserRouter>
-            {!isMobile && user && <NavBar />}
-            {isMobile && user && <BottomTabBar />}
-            {Component && <Component {...{ ...args, isMobile, isStandalone }} />}
+            {isDesktop && user && <NavBar />}
+            {isNotDesktop && user && current !== NavigatorConfig.paths.profile && (
+                <DefaultNavBarController />
+            )}
+            {isNotDesktop && user && <BottomTabBar />}
+            {Component && <Component {...{ ...args }} />}
         </BrowserRouter>
     );
 };

@@ -1,12 +1,15 @@
 import { ViewControllerProps } from './CoreViewController';
 import styled from 'styled-components';
-import { FC, useEffect } from 'react';
+import { FC } from 'react';
+import { isMobile, isStandalone } from '../states';
+import { useNavigator } from '../hooks/useNavigator';
 
 export const DefaultViewControllerWrapper = styled.div`
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    background-color: ${(p) => p.theme.colors.black95};
+    gap: 16px;
+    //background-color: ${(p) => p.theme.colors.black95};
     padding-top: 64px;
 `;
 
@@ -14,27 +17,24 @@ export const DefaultViewControllerMobileWrapper = styled.div`
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    background-color: ${(p) => p.theme.colors.black95};
+    gap: 16px;
+    //background-color: ${(p) => p.theme.colors.black95};
     padding-bottom: 50px;
-    //-webkit-overflow-scrolling: touch;
-    @media (display-mode: fullscreen) {
-        background-color: rebeccapurple;
-    }
+    padding-top: 50px;
 `;
 
 export const DefaultViewControllerStandaloneWrapper = styled.div`
     min-height: 100vh;
     display: flex;
+    gap: 16px;
     flex-direction: column;
-    background-color: ${(p) => p.theme.colors.black95};
+    //background-color: ${(p) => p.theme.colors.black95};
     padding-bottom: 85px;
+    padding-top: 50px;
 `;
 
 export const DefaultViewController: FC<ViewControllerProps> = (props) => {
-    const { children, isMobile, isStandalone } = props;
-    useEffect(() => {
-        document.body.style.background = '#000000';
-    }, []);
+    const { children } = props;
 
     //
     // PWA
@@ -51,5 +51,9 @@ export const DefaultViewController: FC<ViewControllerProps> = (props) => {
     //
     if (isMobile)
         return <DefaultViewControllerMobileWrapper>{children}</DefaultViewControllerMobileWrapper>;
+
+    ///
+    // Desktop
+    //
     return <DefaultViewControllerWrapper>{children}</DefaultViewControllerWrapper>;
 };

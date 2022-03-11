@@ -6,23 +6,10 @@ import { Provider } from 'react-redux';
 import 'react-toastify/dist/ReactToastify.css';
 import { App } from './containers/App';
 import './i18n';
-import { isMobileDevice } from './helpers/mobile';
-import { MobileConfig } from './config/mobile';
-import { isInStandaloneMode } from './helpers/standalone';
-
-/**
- * Установлен в true, если приложение - мобильное
- */
-const isMobile = isMobileDevice() && window.innerWidth < MobileConfig.breakpoint;
-
-/**
- * Возвращает true, если приложение - standalone
- */
-const isStandalone = isInStandaloneMode();
 
 render(
     <Provider store={store}>
-        <App isStandalone={isStandalone} isMobile={isMobile} />
+        <App />
     </Provider>,
     document.getElementById('root')
 );
