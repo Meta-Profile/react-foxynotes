@@ -1,5 +1,5 @@
 {
-    "name": "react-metaprofile",
+    "name": "@meta-profile/application",
     "version": "0.1.0",
     "private": true,
     "dependencies": {
