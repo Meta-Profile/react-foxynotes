@@ -8,9 +8,9 @@ import { ProfileViewController } from '../controllers/ProfileViewController';
 import { useSelector } from 'react-redux';
 import { getAuth } from '../selectors';
 import { UserViewController } from '../controllers/UserViewController';
-import { isNotDesktop } from '../states';
 import { AddViewController } from '../controllers/AddViewController';
 import { DefaultNavBarController } from '../controllers/DefaultNavBarController';
+import { isMobile } from '../states';
 
 export interface RouterProps {}
 
@@ -48,10 +48,7 @@ export const Router: FC<RouterProps> = (props) => {
     return (
         <div>
             {/*{isDesktop && user && <NavBar />}*/}
-            {isNotDesktop && user && current !== NavigatorConfig.paths.profile && (
-                <DefaultNavBarController />
-            )}
-            {isNotDesktop && user && <BottomTabBar />}
+            {isMobile && user && <BottomTabBar />}
             {Controller && <Controller args={args} />}
         </div>
     );

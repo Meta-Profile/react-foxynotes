@@ -34,13 +34,13 @@ export const BottomTaBarButtons: FC = () => {
                 <ButtonTabBarButton
                     key={i}
                     active={v.route === historyFirstPath}
-                    onClick={() => present(v.route)}>
+                    onClick={() => present(v.route, { __tab: true })}>
                     <Icon type={v.icon as IconType} size={'m'} />
                 </ButtonTabBarButton>
             ))}
             <BottomTabBarAvatar
                 active={NavigatorConfig.paths.user === historyFirstPath}
-                onClick={() => present(NavigatorConfig.paths.user)}
+                onClick={() => present(NavigatorConfig.paths.user, { __tab: true })}
                 url={
                     'https://bipbap.ru/wp-content/uploads/2015/02/71accf_f4a84ee668bc4f819fba68f556df3aa9_mv2_d_1638_2048_s_2.jpg'
                 }

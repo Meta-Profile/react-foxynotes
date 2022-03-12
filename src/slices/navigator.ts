@@ -37,8 +37,7 @@ const NavigatorSlice = createSlice({
          * @param action
          */
         presentView: (state, action: PayloadAction<NavigatorRoutePath>) => {
-            if (action.payload.path.startsWith('!')) state.history = [];
-
+            if (action.payload.args && action.payload.args.__tab) state.history = [];
             // Обновляем состояния: текущий VC и историю
             _updateState(state, action.payload);
         },

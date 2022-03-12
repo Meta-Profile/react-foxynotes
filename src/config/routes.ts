@@ -1,13 +1,13 @@
 export const NavigatorConfig = {
     paths: {
-        add: '!add',
-        search: '!search',
-        feed: '!feed',
+        add: '/add',
+        search: '/search',
+        feed: '/feed',
         signIn: '/login/signin',
         signUp: '/login/signup',
-        profile: '/profile',
+        profile: '/space/profile',
         profileMetaId: (mpId: string | number) => NavigatorConfig.paths.profile + '/' + mpId,
-        home: '!space',
-        user: '!user',
+        home: '/space',
+        user: '/user',
     },
 };

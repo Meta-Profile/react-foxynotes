@@ -10,13 +10,7 @@ export const isStandalone = isInStandaloneMode();
 /**
  * Установлен в true, если приложение - мобильное
  */
-export const isMobile =
-    isMobileDevice() && window.innerWidth < MobileConfig.breakpoint && !isStandalone;
-
-/**
- * Установлен в true, если приложение - мобильное
- */
-export const isNotDesktop = isMobileDevice() && window.innerWidth < MobileConfig.breakpoint;
+export const isMobile = isMobileDevice() && window.innerWidth < MobileConfig.breakpoint;
 
 /**
  * Возвращает true, когда viewport - компьютер

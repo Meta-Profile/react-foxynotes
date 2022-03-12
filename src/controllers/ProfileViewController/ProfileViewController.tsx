@@ -1,7 +1,6 @@
 import { ViewControllerProps } from '../CoreViewController';
 import React, { FC, useEffect, useState } from 'react';
 import { DefaultViewController } from '../DefaultViewController';
-import { isNotDesktop } from '../../states';
 import { useNavigator } from '../../hooks/useNavigator';
 import { useMetaProfile } from '../../hooks/useMetaProfile';
 import { defaultTheme } from '../../theme/defaultTheme';
@@ -17,6 +16,8 @@ import { MetaProfileAPI } from '../../api';
 import { ProfileHeader } from './mobile/ProfileHeader';
 import { Button, FlexBox } from '../../components';
 import { StandaloneHelper } from '../../helpers/standalone';
+import { isMobile } from '../../states';
+import { DefaultNavBar } from '../../components/DefaultNavBar';
 
 export const ProfileViewController: FC<ViewControllerProps> = (props) => {
     const { args } = props;
@@ -43,22 +44,19 @@ export const ProfileViewController: FC<ViewControllerProps> = (props) => {
         }
     }, [profile]);
 
-    useEffect(() => {
-        if (profile && newTheme) {
-            console.log(newTheme.banner);
-            updateNavigatorView({ backgroundColor: newTheme.banner, title: profile.title });
-        }
-    }, [newTheme, profile]);
-
     if (!newTheme || !profile) return <div>Loading...</div>;
 
     // ===========================================================================
     // MOBILE || STANDALONE
     // ===========================================================================
-    if (isNotDesktop)
+    if (isMobile)
         return (
             <ThemeProvider theme={newTheme}>
-                <DefaultNavBarController />
+                <DefaultNavBar
+                    backgroundColor={newTheme.banner}
+                    back={true}
+                    title={profile.title}
+                />
                 <ProfileHeader avatar={args.img}>
                     {!isEdit ? (
                         <>
@@ -83,7 +81,7 @@ export const ProfileViewController: FC<ViewControllerProps> = (props) => {
                 <ProfileContainer>
                     {isEdit && (
                         <div style={{ userSelect: 'none' }}>
-                            <MFCBox isMobile={isNotDesktop} title={t('profile_color_chose')}>
+                            <MFCBox isMobile={isMobile} title={t('profile_color_chose')}>
                                 <SliderPicker
                                     color={color}
                                     onChange={(v) => {
@@ -99,7 +97,7 @@ export const ProfileViewController: FC<ViewControllerProps> = (props) => {
                         if (category.category.mpcId === 1) {
                             return category.fields.map((field) => (
                                 <MFCBox
-                                    isMobile={isNotDesktop}
+                                    isMobile={isMobile}
                                     isEditMode={false}
                                     key={field.mpdId}
                                     title={field.field.title}>

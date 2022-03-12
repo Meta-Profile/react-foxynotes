@@ -12,7 +12,7 @@ export const DefaultNavBarWrapper = styled.div<DefaultNavBarWrapperProps>`
     background: ${(p) => p.backgroundColor ?? p.theme.colors.blackAbsolute};
     color: ${(p) => p.foreColor ?? p.theme.colors.white};
     z-index: 100000;
-    position: absolute;
+    position: fixed;
     gap: 16px;
     top: 0;
     left: 0;

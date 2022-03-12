@@ -13,6 +13,10 @@ export const ProfileHeaderWrapper = styled.div<{ backgroundColor?: string }>`
 `;
 
 export const ProfileHeaderAvatar = styled.div<{ src?: string }>`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     width: 168px;
     height: 168px;
     background: url('${(p) => p.src}') center center;
@@ -20,6 +24,9 @@ export const ProfileHeaderAvatar = styled.div<{ src?: string }>`
     box-sizing: border-box;
     margin: 4px;
     border-radius: 1000px;
+    color: ${(p) => p.theme.colors.secondary};
+    text-align: center;
+    gap: 8px;
 `;
 
 export const ProfileHeaderAvatarContainer = styled.div`

@@ -2,7 +2,7 @@ import { useTheme } from 'styled-components';
 import { useEffect, useState } from 'react';
 import tinycolor2 from 'tinycolor2';
 import { StandaloneHelper } from '../helpers/standalone';
-import { isNotDesktop } from '../states';
+import { isMobile } from '../states';
 
 export const useProfileColors = (color?: string) => {
     // Themefy
@@ -32,7 +32,7 @@ export const useProfileColors = (color?: string) => {
         StandaloneHelper.setColor(bannerColor.toHexString());
 
         setNewTheme({
-            banner: isNotDesktop
+            banner: isMobile
                 ? bannerColor.toHexString()
                 : `linear-gradient(180deg, ${bannerColor.toHexString()} 0%, ${bannerColor
                       .clone()
