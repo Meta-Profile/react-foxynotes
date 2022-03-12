@@ -48,7 +48,7 @@ export const HomeViewController: FC<ViewControllerProps> = (props) => {
             title: 'Meta Profile',
             backgroundColor: theme.colors.blackAbsolute,
         });
-    }, [args.t]);
+    }, []);
 
     return (
         <>

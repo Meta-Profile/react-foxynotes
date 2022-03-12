@@ -48,7 +48,7 @@ export const ProfileViewController: FC<ViewControllerProps> = (props) => {
             console.log(newTheme.banner);
             updateNavigatorView({ backgroundColor: newTheme.banner, title: profile.title });
         }
-    }, [newTheme, profile, args.t]);
+    }, [newTheme, profile]);
 
     if (!newTheme || !profile) return <div>Loading...</div>;
 
