@@ -28,6 +28,7 @@
         "react-router-dom": "^5.3.0",
         "react-scripts": "5.0.0",
         "react-select": "^5.2.2",
+        "react-spring": "^9.4.4",
         "react-toastify": "^8.2.0",
         "styled-components": "^5.3.3",
         "tinycolor2": "^1.4.2",

@@ -31,7 +31,7 @@ function shuffle(array: string[]) {
 }
 
 export const HomeViewController: FC<ViewControllerProps> = (props) => {
-    const { children, ...appState } = props;
+    const { children, args, ...appState } = props;
     const { present, updateNavigatorView } = useNavigator();
 
     // ===========================================================================
@@ -48,7 +48,7 @@ export const HomeViewController: FC<ViewControllerProps> = (props) => {
             title: 'Meta Profile',
             backgroundColor: theme.colors.blackAbsolute,
         });
-    }, []);
+    }, [args.t]);
 
     return (
         <>

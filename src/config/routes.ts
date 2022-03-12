@@ -7,7 +7,7 @@ export const NavigatorConfig = {
         signUp: '/login/signup',
         profile: '/profile',
         profileMetaId: (mpId: string | number) => NavigatorConfig.paths.profile + '/' + mpId,
-        home: '!',
+        home: '!space',
         user: '!user',
     },
 };

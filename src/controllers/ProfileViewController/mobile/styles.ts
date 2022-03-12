@@ -48,7 +48,7 @@ export const ProfileHeaderAvatarSmile = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    z-index: 20;
+    z-index: 5;
 
     text-align: center;
     position: absolute;
