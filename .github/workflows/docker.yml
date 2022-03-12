@@ -19,10 +19,14 @@ jobs:
         run: docker login -u ${{secrets.DOCKER_USER}} -p ${{secrets.DOCKER_PASSWORD}}
 
       - name: Build docker
-        run: docker build . --file Dockerfile --tag ${{secrets.DOCKER_USER}}/metaprofile-web:latest
+        env:
+          IMAGE_NAME: ${{ github.event.repository.name }}
+        run: docker build . --file Dockerfile --tag ${{secrets.DOCKER_USER}}/${{IMAGE_NAME}}:${{github.run_number}}
 
       - name: Push docker
-        run: docker push ${{secrets.DOCKER_USER}}/metaprofile-web:latest
+        env:
+          IMAGE_NAME: ${{ github.event.repository.name }}
+        run: docker push ${{secrets.DOCKER_USER}}/${{IMAGE_NAME}}:${{github.run_number}}
 
       - name: Deploy process
         uses: appleboy/ssh-action@master
@@ -39,4 +43,4 @@ jobs:
           port: ${{ secrets.HOST_PORT }}
           envs: APP,USER,PASS,DOCKER_PORT,TARGET_PORT
           script: |
-            /home/meta/deploy_web.sh
+            /home/meta/deploy_web.sh ${{github.run_number}}
