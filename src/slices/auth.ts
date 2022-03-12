@@ -71,6 +71,7 @@ export const AuthSlice = createSlice({
         [authenticate.rejected.toString()]: (state, action) => {
             state.user = undefined;
             state.loading = false;
+            // @todo реализовать действия при сгорании токена
         },
         [authenticate.fulfilled.toString()]: (
             state,

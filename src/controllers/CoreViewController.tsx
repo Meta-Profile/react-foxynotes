@@ -4,4 +4,5 @@ export interface ViewControllerProps {
     bodyColor?: string;
     appColor?: string;
     title?: string;
+    args?: any;
 }

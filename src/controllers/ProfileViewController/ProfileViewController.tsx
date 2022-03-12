@@ -19,8 +19,9 @@ import { Button, FlexBox } from '../../components';
 import { StandaloneHelper } from '../../helpers/standalone';
 
 export const ProfileViewController: FC<ViewControllerProps> = (props) => {
+    const { args } = props;
     const [color, setColor] = useState<string>();
-    const { args, updateNavigatorView } = useNavigator();
+    const { updateNavigatorView } = useNavigator();
     const { t } = useTranslation();
     const [profile] = useMetaProfile(args.mpId);
     const [isEdit, setIsEdit] = useState(false);
@@ -47,7 +48,7 @@ export const ProfileViewController: FC<ViewControllerProps> = (props) => {
             console.log(newTheme.banner);
             updateNavigatorView({ backgroundColor: newTheme.banner, title: profile.title });
         }
-    }, [newTheme, profile]);
+    }, [newTheme, profile, args.t]);
 
     if (!newTheme || !profile) return <div>Loading...</div>;
 
