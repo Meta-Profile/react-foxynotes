@@ -14,3 +14,4 @@
 !/tsconfig.json
 !/.gitignore
 !/package-lock.json
+!/bitbucket-pipelines.yml
