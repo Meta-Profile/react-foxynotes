@@ -1,18 +1,12 @@
 import { ViewControllerProps } from '../CoreViewController';
-import { DefaultViewController } from '../DefaultViewController';
 import React, { FC, useEffect, useState } from 'react';
 import { ThemeProvider, useTheme } from 'styled-components';
 import { defaultTheme } from '../../theme/defaultTheme';
 import { useNavigator } from '../../hooks/useNavigator';
 import { Box, Button, FlexBox, Input, Text } from '../../components';
-import { NavigatorConfig } from '../../config/routes';
-import { FlexBoxCenter, FlexBoxColumn } from '../../components/FlexBox';
-import { StandaloneHelper } from '../../helpers/standalone';
-import { NavBar } from '../../components/NavBar';
 import { DefaultNavBar } from '../../components/DefaultNavBar';
 import { useProfileColors } from '../../hooks/useProfileColors';
 import { ProfileHeader } from '../ProfileViewController/mobile/ProfileHeader';
-import { ProfileContainer } from '../ProfileViewController/mobile/ProfileContainer';
 import {
     DefaultPanelContainer,
     DefaultPanelFooterContainer,
