@@ -1,42 +1,39 @@
-name: Build And Deploy CI
+image: atlassian/default-image:3
 
-on:
-  push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
-
-  workflow_dispatch:
-
-jobs:
-  build:
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@v2
-
-      - name: Login docker
-        run: docker login -u ${{secrets.DOCKER_USER}} -p ${{secrets.DOCKER_PASSWORD}}
-
-      - name: Build docker
-        run: docker build . --file Dockerfile --tag ${{secrets.DOCKER_USER}}/metaprofile-web:latest
-
-      - name: Push docker
-        run: docker push ${{secrets.DOCKER_USER}}/metaprofile-web:latest
-
-      - name: Deploy process
-        uses: appleboy/ssh-action@master
-        env:
-          APP: ${{secrets.APP_NAME}}
-          USER: ${{secrets.DOCKER_USER}}
-          PASS: ${{secrets.DOCKER_PASSWORD}}
-          TARGET_PORT: ${{ secrets.TARGET_PORT }}
-          DOCKER_PORT: ${{ secrets.DOCKER_PORT }}
-        with:
-          host: ${{ secrets.HOST }}
-          username: ${{ secrets.HOST_USERNAME }}
-          password: ${{ secrets.HOST_PASSWORD }}
-          port: ${{ secrets.HOST_PORT }}
-          envs: APP,USER,PASS,DOCKER_PORT,TARGET_PORT
-          script: |
-            /home/meta/deploy_web.sh
+pipelines:
+  default:
+    - parallel:
+        - step:
+            name: Build and Test
+            script:
+              - IMAGE_NAME=$BITBUCKET_REPO_SLUG
+              - docker build . --file Dockerfile --tag ${DOCKER_USER}/metaprofile-web:latest
+            services:
+              - docker
+            caches:
+              - docker
+  branches:
+    master:
+      - step:
+          name: Build and Test
+          script:
+            - IMAGE_NAME=$BITBUCKET_REPO_SLUG
+            - docker build . --file Dockerfile --tag ${DOCKER_USER}/metaprofile-web:latest
+            - docker save ${IMAGE_NAME} --output "${IMAGE_NAME}.tar"
+          services:
+            - docker
+          caches:
+            - docker
+          artifacts:
+            - "*.tar"
+      - step:
+          name: Deploy to Production
+          deployment: Production
+          script:
+            - echo ${DOCKER_PASSWORD} | docker login --username "$DOCKER_USER" --password-stdin
+            - IMAGE_NAME=$BITBUCKET_REPO_SLUG
+            - docker load --input "${IMAGE_NAME}.tar"
+            - VERSION="${BITBUCKET_BUILD_NUMBER}"
+            - docker push "${DOCKER_USER}/metaprofile-web:${VERSION}"
+          services:
+            - docker
