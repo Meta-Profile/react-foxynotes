@@ -4,6 +4,7 @@ export const ProfileHeaderWrapper = styled.div<{ backgroundColor?: string }>`
     background: ${(p) => p.theme.banner};
     padding: 16px;
     padding-top: 66px;
+    padding-bottom: 32px;
     width: 100%;
     display: flex;
     flex-direction: column;
@@ -34,6 +35,15 @@ export const ProfileHeaderAvatarContainer = styled.div`
     border-radius: 1000px;
     border: 2px dashed ${(p) => p.theme.colors.secondary};
     margin-bottom: 20px;
+`;
+
+export const ProfileHeaderAvatarInput = styled.input`
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
 `;
 
 export const ProfileContainerWrapper = styled.div``;

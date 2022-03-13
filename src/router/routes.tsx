@@ -9,7 +9,6 @@ import { useSelector } from 'react-redux';
 import { getAuth } from '../selectors';
 import { UserViewController } from '../controllers/UserViewController';
 import { AddViewController } from '../controllers/AddViewController';
-import { DefaultNavBarController } from '../controllers/DefaultNavBarController';
 import { isMobile } from '../states';
 
 export interface RouterProps {}

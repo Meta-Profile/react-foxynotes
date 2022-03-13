@@ -1,4 +1,9 @@
 {
+  "button.create": "Создать",
+
+  "text.type_title_and_color": "Введите название и выберите цвет",
+  "text.type_title_meta_profile": "Введите название и выберите цвет",
+
   "title": "Foxy Notes",
   "login_title": "Foxy Notes",
   "login_text": "Foxy Notes - это сервис, меняющий взаимоотношения людей в лучшую сторону",

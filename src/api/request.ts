@@ -12,6 +12,7 @@ export class Request {
     private requestMethod: APIRequestMethod = APIRequestMethod.GET;
     private requestQuery: Array<{ key: string; value: string }> = [];
     private requestBody: unknown;
+    private jsonBody = true;
 
     /**
      * Стандартные заголовки
@@ -35,6 +36,11 @@ export class Request {
      */
     public lang(l: string): Request {
         this.requestLang = l;
+        return this;
+    }
+
+    public rawBody(): Request {
+        this.jsonBody = false;
         return this;
     }
 
@@ -153,7 +159,9 @@ export class Request {
             url,
             body:
                 this.requestMethod === APIRequestMethod.POST
-                    ? JSON.stringify(this.requestBody)
+                    ? this.jsonBody
+                        ? JSON.stringify(this.requestBody)
+                        : (this.requestBody as any)
                     : undefined,
         };
     }

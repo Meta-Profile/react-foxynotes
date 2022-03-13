@@ -12,20 +12,23 @@ import { ProfileContainer } from './mobile/ProfileContainer';
 import { SliderPicker } from 'react-color';
 import { useTranslation } from 'react-i18next';
 import { useDebouncedCallback } from 'use-debounce';
-import { MetaProfileAPI } from '../../api';
+import { FileAPI, MetaProfile, MetaProfileAPI } from '../../api';
 import { ProfileHeader } from './mobile/ProfileHeader';
 import { Button, FlexBox } from '../../components';
 import { StandaloneHelper } from '../../helpers/standalone';
 import { isMobile } from '../../states';
 import { DefaultNavBar } from '../../components/DefaultNavBar';
+import { useApp } from '../../hooks/useApp';
+import { toast } from 'react-toastify';
 
 export const ProfileViewController: FC<ViewControllerProps> = (props) => {
     const { args } = props;
     const [color, setColor] = useState<string>();
-    const { updateNavigatorView } = useNavigator();
     const { t } = useTranslation();
-    const [profile] = useMetaProfile(args.mpId);
+    const [profile, setProfile] = useState<MetaProfile>();
     const [isEdit, setIsEdit] = useState(false);
+    const [avatar, setAvatar] = useState<string>();
+    const { setLoading } = useApp();
 
     const newTheme = useProfileColors(color);
 
@@ -39,10 +42,22 @@ export const ProfileViewController: FC<ViewControllerProps> = (props) => {
     }, []);
 
     useEffect(() => {
-        if (profile) {
-            setColor(profile.color);
+        if (args.mpId) {
+            setLoading(true);
+            MetaProfileAPI.get(args.mpId).then(({ response }) => {
+                setProfile(response);
+                setColor(response.color);
+                if (response.avatar) {
+                    FileAPI.acceptById(response.avatar.id)
+                        .then((value) => setAvatar(value))
+                        .catch(() => toast.error('Ошибка при загрузке изображения :('))
+                        .finally(() => setLoading(false));
+                } else {
+                    setLoading(false);
+                }
+            });
         }
-    }, [profile]);
+    }, [args]);
 
     if (!newTheme || !profile) return <div>Loading...</div>;
 
@@ -57,7 +72,7 @@ export const ProfileViewController: FC<ViewControllerProps> = (props) => {
                     back={true}
                     title={profile.title}
                 />
-                <ProfileHeader avatar={args.img}>
+                <ProfileHeader avatar={avatar}>
                     {!isEdit ? (
                         <>
                             <Button

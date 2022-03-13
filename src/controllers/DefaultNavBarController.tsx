@@ -1,4 +1,5 @@
 import { DefaultNavBar } from 'components/DefaultNavBar';
+
 import { FC } from 'react';
 import { useNavigator } from '../hooks/useNavigator';
 
@@ -8,6 +9,7 @@ export interface DefaultNavBarControllerProps {
 export const DefaultNavBarController: FC<DefaultNavBarControllerProps> = (props) => {
     const { onAction } = props;
     const { states } = useNavigator();
+
     return (
         <DefaultNavBar
             title={states.title}

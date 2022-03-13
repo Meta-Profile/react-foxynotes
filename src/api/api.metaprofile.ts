@@ -1,6 +1,13 @@
 import { Request } from './request';
 import { ApiConfig } from '../config/api';
-import { MetaProfile, MetaProfileCategory, MetaProfileField, MetaProfileUpdatable } from './types';
+import {
+    APIControllerResponse,
+    MetaProfile,
+    MetaProfileCategory,
+    MetaProfileCreatePayload,
+    MetaProfileField,
+    MetaProfileUpdatable,
+} from './types';
 
 /**
  * Основное API мета профиля
@@ -38,6 +45,18 @@ export class MetaProfileAPI {
             .post()
             .authorize()
             .body(data)
+            .release<MetaProfile>();
+    }
+
+    /**
+     * Создает новый мета-профиль
+     * @param props
+     */
+    public static async create(props: MetaProfileCreatePayload) {
+        return await new Request(ApiConfig.endpoint + '/mp/create')
+            .post()
+            .authorize()
+            .body(props)
             .release<MetaProfile>();
     }
 }

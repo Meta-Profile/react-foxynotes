@@ -1,6 +1,8 @@
 /**
  * Обычный ответ API
  */
+import { FileEntity } from './api.file';
+
 export interface APIControllerResponse<T = unknown> {
     response: T;
     error?: string;
@@ -73,5 +75,12 @@ export interface MetaProfile extends MetaProfileUpdatable {
     mpId: number;
     authorId: number;
     type: any;
+    avatar: Nullable<FileEntity>;
     composition: MetaProfileComposition[];
+}
+
+export interface MetaProfileCreatePayload {
+    title: string;
+    color: string;
+    fileId?: number;
 }

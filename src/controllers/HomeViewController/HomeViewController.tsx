@@ -1,6 +1,6 @@
 import { ViewControllerProps } from '../CoreViewController';
 import { DefaultViewController } from '../DefaultViewController';
-import React, { FC, useEffect } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import styled, { useTheme } from 'styled-components';
 import { defaultTheme } from '../../theme/defaultTheme';
 import { useNavigator } from '../../hooks/useNavigator';
@@ -9,6 +9,7 @@ import { FlexBox, FlexBoxCenter, FlexBoxColumn } from '../../components/FlexBox'
 import { useMetaProfilesList } from '../../hooks/useMetaProfilesList';
 import { Divider, Text } from '../../components';
 import { StandaloneHelper } from '../../helpers/standalone';
+import { FileAPI } from '../../api';
 
 const avatars = shuffle([
     'https://img4.goodfon.com/wallpaper/nbig/6/43/krasivaia-devushka-shatenka-plate-poza-figura-pricheska-maki.jpg',
@@ -55,7 +56,12 @@ export const HomeViewController: FC<ViewControllerProps> = (props) => {
             <DefaultViewController {...appState}>
                 <FlexBoxCenter column gap width={'100%'}>
                     {list.map((v, i) => {
-                        const a = avatars[i % avatars.length];
+                        const a = { source: avatars[i % avatars.length] } as any;
+                        if (v.avatar) {
+                            FileAPI.acceptById(v.avatar.id).then((b) => {
+                                a.source = b;
+                            });
+                        }
                         return (
                             <div key={v.mpId} style={{ width: '100%' }}>
                                 {i > 0 && <Divider style={{ opacity: 0.1 }} />}
@@ -66,10 +72,13 @@ export const HomeViewController: FC<ViewControllerProps> = (props) => {
                                     onClick={() =>
                                         present(NavigatorConfig.paths.profile, {
                                             mpId: v.mpId,
-                                            img: a,
+                                            img: a.source,
                                         })
                                     }>
-                                    <ImageProfile src={a} />
+                                    <ImgProf img={v.avatar?.id}>
+                                        {(img: any) => <ImageProfile src={img ?? a.source} />}
+                                    </ImgProf>
+
                                     <FlexBoxColumn flex={1} justify={'center'} gap={8}>
                                         <Text color={'whiteAbsolute'} type={'normal'}>
                                             {v.title}
@@ -84,6 +93,19 @@ export const HomeViewController: FC<ViewControllerProps> = (props) => {
             </DefaultViewController>
         </>
     );
+};
+
+export const ImgProf: FC<{ img?: number }> = (props) => {
+    const { img } = props;
+    const [path, setPath] = useState<string>();
+    useEffect(() => {
+        if (img) {
+            FileAPI.acceptById(img).then((b) => {
+                setPath(b);
+            });
+        }
+    }, [img]);
+    return <>{(props.children as any)(path)}</>;
 };
 
 export const ImageProfile = styled.div<{ src?: string }>`
